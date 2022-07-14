@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+spring:
+  jpa:
+    #    database-platform: com.oocl.demo.commonlib.jpa.MySQL8DialectCustomUtf8mb40900AsCs
+    properties:
+      hibernate:
+        dialect:
+          storage_engine: innodb
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  datasource:
+    url: "jdbc:mariadb://localhost:3306?user=root&password=mysql2022&allowPublicKeyRetrieval=true&database=laboratory"
+    driver-class-name: org.mariadb.jdbc.Driver
+
