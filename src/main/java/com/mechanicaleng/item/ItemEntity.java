@@ -22,6 +22,15 @@ public class ItemEntity {
 
     private String name;
 
+    private String serial; //serial number for scanning QR code
+
+    private String password;
+
+    private Boolean status; // to specify if the item is still in lab or not
+
+    private Boolean damaged; // to specify if the item is damaged or not
+
+
     public static ItemEntity fromDto(ItemDto itemDto){
         return ItemEntity.builder().name(itemDto.getName()).build();
     }

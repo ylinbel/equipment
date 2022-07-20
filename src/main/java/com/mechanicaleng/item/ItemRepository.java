@@ -6,4 +6,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ItemRepository extends JpaRepository<ItemEntity, String> {
     public void deleteByNameAfter(String prefix);
+
+    public ItemEntity findItemEntitiesByNameEquals(String name);
+
+    //why use void
 }
