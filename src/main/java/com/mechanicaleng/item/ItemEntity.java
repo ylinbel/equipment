@@ -22,16 +22,48 @@ public class ItemEntity {
 
     private String name;
 
-    private String serial; //serial number for scanning QR code
+    private String serial; //serial number, should be the same as scanning QR code
 
     private String password;
 
-    private Boolean status; // to specify if the item is still in lab or not
-
-    private Boolean damaged; // to specify if the item is damaged or not
+    private Status status; //to specify if the item is in available, not available or damaged.
 
 
     public static ItemEntity fromDto(ItemDto itemDto){
         return ItemEntity.builder().name(itemDto.getName()).build();
+    }
+
+
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSerialNumber() {
+        return serial;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setSerial(String serial) {
+        this.serial = serial;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

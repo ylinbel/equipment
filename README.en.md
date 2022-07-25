@@ -1,10 +1,22 @@
 # equipment
 
 #### Description
-This is the equipment management project
+This is a lab management system for the Dynamics Lab 
 
 #### Software Architecture
-Software architecture description
+This project uses the springboot framework which provides a comprehensive programming 
+and configuration model for modern Java-based enterprise applications - on any kind of 
+deployment platform. It uses Maven as the software project management tool. 
+
+
+Reference:
+<br/>
+https://spring.io/projects/spring-framework 
+<br/>
+https://maven.apache.org/
+
+Language: 
+Java
 
 #### Installation
 

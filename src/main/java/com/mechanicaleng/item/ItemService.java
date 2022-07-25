@@ -1,53 +1,62 @@
 package com.mechanicaleng.item;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ItemService {
     @Autowired
     public ItemRepository itemRepository;
 
+
+    //add item
+
     public void addItem(ItemDto itemDto) {
         ItemEntity itemEntity = ItemEntity.fromDto(itemDto);
         itemRepository.save(itemEntity);
     }
 
-    // Question: why add itemDto? how about addItem with information
-
-//    @Override
-//    public void addItemWithInfo(String name, String password, String serial) {
-//        ItemDto itemDTo = new ItemDto(name, password, serial);
-//    }
 
     public void deleteWithName(String name) {
         itemRepository.deleteByNameAfter(name);
     }
 
-    public ItemEntity findItemWithName(String name) {
-        ItemEntity item = itemRepository.findItemEntitiesByNameEquals(name);
+    //set item status
+
+    public void borrowItem(Long id) {
+        ItemEntity itemEntity = itemRepository.findItemEntityById(id);
+        itemEntity.setStatus(Status.NotAvailable);
+        itemRepository.save(itemEntity);
+    }
+
+    public void returnItem(Long id) {
+        ItemEntity itemEntity = itemRepository.findItemEntityById(id);
+        itemEntity.setStatus(Status.Available);
+        itemRepository.save(itemEntity);
+    }
+
+    public void reportDamaged(Long id) {
+        ItemEntity itemEntity = itemRepository.findItemEntityById(id);
+        itemEntity.setStatus(Status.Damaged);
+        itemRepository.save(itemEntity);
+    }
+
+    //find item
+    public ItemEntity findItemsWithId(long id) {
+        ItemEntity item = itemRepository.findItemEntityById(id);
         return item;
     }
 
-    public void borrowItem(ItemDto itemDto) {
-        itemDto.setStatus(Boolean.FALSE);
-        ItemEntity itemEntity = ItemEntity.fromDto(itemDto);
-        itemRepository.save(itemEntity);
+
+    public List<ItemEntity> findItemsWithName(String name) {
+        List<ItemEntity> list = itemRepository.findItemEntitiesByName(name);
+        return list;
     }
 
-    public void returnItem(ItemDto itemDto) {
-        itemDto.setStatus(Boolean.TRUE);
-        ItemEntity itemEntity = ItemEntity.fromDto(itemDto);
-        itemRepository.save(itemEntity);
-    }
 
-    public void returnDamagedItem(ItemDto itemDto) {
-        itemDto.setStatus(Boolean.FALSE);
-        itemDto.setDamaged(Boolean.TRUE);
-        ItemEntity itemEntity = ItemEntity.fromDto(itemDto);
-        itemRepository.save(itemEntity);
-    }
+
 
 
 
