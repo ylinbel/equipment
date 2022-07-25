@@ -13,7 +13,7 @@ public class ItemDto{
 
     private String name;
 
-    private String serial; //serial number for scanning QR code
+    private String serial; //serial number - QR code
 
     private String password;
 

@@ -18,9 +18,19 @@ public class ItemService {
         itemRepository.save(itemEntity);
     }
 
+    //delete item
+
 
     public void deleteWithName(String name) {
         itemRepository.deleteByNameAfter(name);
+    }
+
+    public void deleteWithId(Long id) {
+        itemRepository.deleteById(id);
+    }
+
+    public void deleteWithSerialNumber(String serial) {
+        itemRepository.deleteBySerial(serial);
     }
 
     //set item status
@@ -43,18 +53,27 @@ public class ItemService {
         itemRepository.save(itemEntity);
     }
 
-    //find item
+    //search item
     public ItemEntity findItemsWithId(long id) {
         ItemEntity item = itemRepository.findItemEntityById(id);
         return item;
     }
 
+    public List<ItemEntity> findItemsWithSerial(String serial) {
+        List<ItemEntity> list = itemRepository.findItemEntitiesBySerial(serial);
+        return list;
+    }
 
     public List<ItemEntity> findItemsWithName(String name) {
         List<ItemEntity> list = itemRepository.findItemEntitiesByName(name);
         return list;
     }
 
+    //find all damaged items
+    public List<ItemEntity> findAllDamagedItems() {
+        List<ItemEntity> damagedList = itemRepository.findAllByStatusEquals(Status.Damaged);
+        return damagedList;
+    }
 
 
 

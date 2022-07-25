@@ -22,7 +22,7 @@ public class ItemEntity {
 
     private String name;
 
-    private String serial; //serial number, should be the same as scanning QR code
+    private String serial; //serial number - QR code
 
     private String password;
 
