@@ -27,24 +27,21 @@ public class ItemController {
 //    }
     //需要加上
 
-    @PutMapping("items/{id}")
-    public ResponseEntity<String> borrowItem(@RequestBody Long id) {
-        ItemEntity itemEntity = itemService.findItemsWithId(id);
-        itemEntity.setStatusEnum(StatusEnum.NotAvailable);
+    @PutMapping("/{id}/borrow")
+    public ResponseEntity<String> borrowItem(@PathVariable Long id) {
+        itemService.borrowItem(id);
         return ResponseEntity.ok("Success");
     }
 
-    @PutMapping("items/{id}")
-    public ResponseEntity<String> returnItem(@RequestBody Long id) {
-        ItemEntity itemEntity = itemService.findItemsWithId(id);
-        itemEntity.setStatusEnum(StatusEnum.Available);
+    @PutMapping("/{id}/return")
+    public ResponseEntity<String> returnItem(@PathVariable Long id) {
+        itemService.returnItem(id);
         return ResponseEntity.ok("Success");
     }
 
-    @PutMapping("items/{id}")
-    public ResponseEntity<String> reportDamage(@RequestBody Long id) {
-        ItemEntity itemEntity = itemService.findItemsWithId(id);
-        itemEntity.setStatusEnum(StatusEnum.Damaged);
+    @PutMapping("/{id}/report-damage")
+    public ResponseEntity<String> reportDamage(@PathVariable Long id) {
+        itemService.reportDamaged(id);
         return ResponseEntity.ok("Success");
     }
     
