@@ -22,67 +22,67 @@ public class ItemService {
 
 
     public void deleteWithName(String name) {
-        itemRepository.deleteByNameAfter(name);
+        itemRepository.deleteByNameEquals(name);
     }
 
     public void deleteWithId(Long id) {
-        itemRepository.deleteById(id);
+        itemRepository.deleteByIdEquals(id);
     }
 
     public void deleteWithSerialNumber(String serial) {
-        itemRepository.deleteBySerial(serial);
+        itemRepository.deleteBySerialEquals(serial);
     }
 
     //set item status
 
     public void borrowItem(Long id) {
-        ItemEntity itemEntity = itemRepository.findItemEntityById(id);
-        itemEntity.setStatus(Status.NotAvailable);
+        ItemEntity itemEntity = itemRepository.findItemEntityByIdEquals(id);
+        itemEntity.setStatusEnum(StatusEnum.NotAvailable);
         itemRepository.save(itemEntity);
     }
 
     public void returnItem(Long id) {
-        ItemEntity itemEntity = itemRepository.findItemEntityById(id);
-        itemEntity.setStatus(Status.Available);
+        ItemEntity itemEntity = itemRepository.findItemEntityByIdEquals(id);
+        itemEntity.setStatusEnum(StatusEnum.Available);
         itemRepository.save(itemEntity);
     }
 
     public void reportDamaged(Long id) {
-        ItemEntity itemEntity = itemRepository.findItemEntityById(id);
-        itemEntity.setStatus(Status.Damaged);
+        ItemEntity itemEntity = itemRepository.findItemEntityByIdEquals(id);
+        itemEntity.setStatusEnum(StatusEnum.Damaged);
         itemRepository.save(itemEntity);
     }
 
     //search item
     public ItemEntity findItemsWithId(long id) {
-        ItemEntity item = itemRepository.findItemEntityById(id);
+        ItemEntity item = itemRepository.findItemEntityByIdEquals(id);
         return item;
     }
 
     public List<ItemEntity> findItemsWithSerial(String serial) {
-        List<ItemEntity> list = itemRepository.findItemEntitiesBySerial(serial);
+        List<ItemEntity> list = itemRepository.findItemEntitiesBySerialLike(serial);
         return list;
     }
 
     public List<ItemEntity> findItemsWithName(String name) {
-        List<ItemEntity> list = itemRepository.findItemEntitiesByName(name);
+        List<ItemEntity> list = itemRepository.findItemEntitiesByNameLike(name);
         return list;
     }
 
-    //find all damaged items
-    public List<ItemEntity> findAllDamagedItems() {
-        List<ItemEntity> damagedList = itemRepository.findAllByStatusEquals(Status.Damaged);
-        return damagedList;
+    public List<ItemEntity> findItemsBySet(String set) {
+        List<ItemEntity> list = itemRepository.findItemEntitiesBySetLike(set);
+        return list;
     }
 
 
 
+    //find all damaged items
+    public List<ItemEntity> findAllDamagedItems() {
+        List<ItemEntity> damagedList = itemRepository.findAllByStatusEquals(StatusEnum.Damaged);
+        return damagedList;
+    }
 
-
-
-
-
-
+    // set account
 
 
 }

@@ -6,7 +6,7 @@ This is a lab management system for the Dynamics Lab
 #### Software Architecture
 This project uses the springboot framework which provides a comprehensive programming 
 and configuration model for modern Java-based enterprise applications - on any kind of 
-deployment platform. It uses Maven as the software project management tool. 
+deployment platform. It uses Maven as the software project management tool. It is a domain driven design project.
 
 
 Reference:

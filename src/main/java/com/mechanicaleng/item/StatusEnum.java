@@ -1,6 +1,6 @@
 package com.mechanicaleng.item;
 
-public enum Status {
+public enum StatusEnum {
         Available,
         Damaged,
         NotAvailable

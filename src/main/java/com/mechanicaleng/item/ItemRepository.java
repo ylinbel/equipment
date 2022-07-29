@@ -4,24 +4,25 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface ItemRepository extends JpaRepository<ItemEntity, String> {
 
-    public void deleteByNameAfter(String prefix);
+    public void deleteByNameEquals(String prefix);
 
-    public void deleteBySerial(String serial);
+    public void deleteBySerialEquals(String serial);
 
-    public void deleteById(Long id);
+    public void deleteByIdEquals(Long id);
 
-    public List<ItemEntity> findItemEntitiesByName(String name);
+    public List<ItemEntity> findItemEntitiesByNameLike(String name);
 
-    public List<ItemEntity> findItemEntitiesBySerial(String serial);
+    public List<ItemEntity> findItemEntitiesBySerialLike(String serial);
 
-    public ItemEntity findItemEntityById(Long id);
+    public ItemEntity findItemEntityByIdEquals(Long id);
 
-    public List<ItemEntity> findAllByStatusEquals(Status status);
+    public List<ItemEntity> findAllByStatusEquals(StatusEnum statusEnum);
+
+    public List<ItemEntity> findItemEntitiesBySetLike(String set);
 
 
 }
