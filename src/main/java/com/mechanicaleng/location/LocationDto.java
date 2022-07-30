@@ -1,4 +1,4 @@
-package com.mechanicaleng.container;
+package com.mechanicaleng.location;
 
 
 import lombok.AllArgsConstructor;
@@ -10,9 +10,14 @@ import lombok.NoArgsConstructor;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContainerDto {
+public class LocationDto {
 
     private String name;
 
     private String serial;
+
+    private Integer layer;
+
+    private String cabinet;
+
 }

@@ -20,9 +20,4 @@ public interface ItemRepository extends JpaRepository<ItemEntity, String> {
 
     public List<ItemEntity> findItemEntitiesBySetLike(String set);
 
-
-
-
-
-
 }
