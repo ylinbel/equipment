@@ -68,13 +68,36 @@ public class ItemController {
         return ResponseEntity.ok("Success");
     }
 
-    // find all demaged items
+    // find all damaged items
 
     @GetMapping("/lists")
     public ResponseEntity<String> findAllDamagedItems() {
         itemService.findAllDamagedItems();
         return ResponseEntity.ok("Success");
     }
+
+    //update item information
+
+    @PutMapping("/{id}/update")
+    public ResponseEntity<String> updateItemName(@PathVariable Long id, String name) {
+        itemService.updateName(id, name);
+        return ResponseEntity.ok("Success");
+    }
+
+    @PutMapping("/{id}/update")
+    public ResponseEntity<String> updateItemSerial(@PathVariable Long id, String serial) {
+        itemService.updateSerial(id, serial);
+        return ResponseEntity.ok("Success");
+    }
+
+    @PutMapping("/{id}/update")
+    public ResponseEntity<String> updateItemSet(@PathVariable Long id, String set) {
+        itemService.updateSet(id, set);
+        return ResponseEntity.ok("Success");
+    }
+
+
+
 
 
 

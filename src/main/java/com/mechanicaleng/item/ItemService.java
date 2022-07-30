@@ -67,7 +67,6 @@ public class ItemService {
     }
 
 
-
     //find all damaged items
     public List<ItemEntity> findAllDamagedItems() {
         List<ItemEntity> damagedList = itemRepository.findAllByStatusEnumEquals(StatusEnum.Damaged);
