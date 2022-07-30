@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
-
 @RestController
 @RequestMapping("/items")
 public class ItemController {
@@ -18,14 +16,6 @@ public class ItemController {
         return ResponseEntity.ok("Success");
     }
 
-    //delete functions
-
-//    @DeleteMapping("items/{id}")
-//    public ResponseEntity<String> deleteItem(@RequestBody Long id) {
-//        ItemEntity itemEntity = itemService.findItemsWithId(id);
-//        itemEntity.set(null);
-//    }
-    //需要加上
 
     @PutMapping("/{id}/borrow")
     public ResponseEntity<String> borrowItem(@PathVariable Long id) {
@@ -44,7 +34,49 @@ public class ItemController {
         itemService.reportDamaged(id);
         return ResponseEntity.ok("Success");
     }
-    
+
+    // delete item
+    @DeleteMapping("/{id}/delete")
+    public ResponseEntity<String> deleteItemEntity(@PathVariable Long id) {
+        itemService.deleteWithId(id);
+        return ResponseEntity.ok("Deleted");
+    }
+
+    //search item
+
+    @GetMapping("/{id}")
+    public ResponseEntity<String> findItemWithId(@PathVariable Long id) {
+        itemService.findItemsWithId(id);
+        return ResponseEntity.ok("Success");
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<String> findItemWithName(@PathVariable String name) {
+        itemService.findItemsWithName(name);
+        return ResponseEntity.ok("Success");
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<String> findItemWithSerial(@PathVariable String serial) {
+        itemService.findItemsWithSerial(serial);
+        return ResponseEntity.ok("Success");
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<String> findItemsBySetName(@PathVariable String set) {
+        itemService.findItemsBySetName(set);
+        return ResponseEntity.ok("Success");
+    }
+
+    // find all demaged items
+
+    @GetMapping("/lists")
+    public ResponseEntity<String> findAllDamagedItems() {
+        itemService.findAllDamagedItems();
+        return ResponseEntity.ok("Success");
+    }
+
+
 
 
 

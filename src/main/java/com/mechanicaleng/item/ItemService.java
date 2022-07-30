@@ -20,18 +20,10 @@ public class ItemService {
 
     //delete item
 
-
-    public void deleteWithName(String name) {
-        itemRepository.deleteByNameEquals(name);
-    }
-
     public void deleteWithId(Long id) {
         itemRepository.deleteByIdEquals(id);
     }
 
-    public void deleteWithSerialNumber(String serial) {
-        itemRepository.deleteBySerialEquals(serial);
-    }
 
     //set item status
 
@@ -69,7 +61,7 @@ public class ItemService {
         return list;
     }
 
-    public List<ItemEntity> findItemsBySet(String set) {
+    public List<ItemEntity> findItemsBySetName(String set) {
         List<ItemEntity> list = itemRepository.findItemEntitiesBySetLike(set);
         return list;
     }
@@ -78,11 +70,28 @@ public class ItemService {
 
     //find all damaged items
     public List<ItemEntity> findAllDamagedItems() {
-        List<ItemEntity> damagedList = itemRepository.findAllByStatusEquals(StatusEnum.Damaged);
+        List<ItemEntity> damagedList = itemRepository.findAllByStatusEnumEquals(StatusEnum.Damaged);
         return damagedList;
     }
 
-    // set account
+    // update item information
 
+    public void updateName(long id, String name) {
+        ItemEntity itemEntity = itemRepository.findItemEntityByIdEquals(id);
+        itemEntity.setName(name);
+        itemRepository.save(itemEntity);
+    }
+
+    public void updateSerial(long id, String serial) {
+        ItemEntity itemEntity = itemRepository.findItemEntityByIdEquals(id);
+        itemEntity.setSerial(serial);
+        itemRepository.save(itemEntity);
+    }
+
+    public void updateSet(long id, String set) {
+        ItemEntity itemEntity = itemRepository.findItemEntityByIdEquals(id);
+        itemEntity.setSet(set);
+        itemRepository.save(itemEntity);
+    }
 
 }
