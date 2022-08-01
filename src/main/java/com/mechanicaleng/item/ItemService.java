@@ -62,7 +62,7 @@ public class ItemService {
     }
 
     public List<ItemEntity> findItemsBySetName(String set) {
-        List<ItemEntity> list = itemRepository.findItemEntitiesBySetLike(set);
+        List<ItemEntity> list = itemRepository.findItemEntitiesBySetNumLike(set);
         return list;
     }
 
@@ -89,7 +89,7 @@ public class ItemService {
 
     public void updateSet(long id, String set) {
         ItemEntity itemEntity = itemRepository.findItemEntityByIdEquals(id);
-        itemEntity.setSet(set);
+        itemEntity.setSetNum(set);
         itemRepository.save(itemEntity);
     }
 

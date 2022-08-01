@@ -18,6 +18,6 @@ public interface ItemRepository extends JpaRepository<ItemEntity, String> {
 
     public List<ItemEntity> findAllByStatusEnumEquals(StatusEnum statusEnum);
 
-    public List<ItemEntity> findItemEntitiesBySetLike(String set);
+    public List<ItemEntity> findItemEntitiesBySetNumLike(String setNum);
 
 }

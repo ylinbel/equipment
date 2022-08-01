@@ -44,25 +44,25 @@ public class ItemController {
 
     //search item
 
-    @GetMapping("/{id}")
+    @GetMapping("/find-by-id/{id}")
     public ResponseEntity<String> findItemWithId(@PathVariable Long id) {
         itemService.findItemsWithId(id);
         return ResponseEntity.ok("Success");
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/find-by-name/{name}")
     public ResponseEntity<String> findItemWithName(@PathVariable String name) {
         itemService.findItemsWithName(name);
         return ResponseEntity.ok("Success");
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/find-by-serial/{serial}")
     public ResponseEntity<String> findItemWithSerial(@PathVariable String serial) {
         itemService.findItemsWithSerial(serial);
         return ResponseEntity.ok("Success");
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/find-by-set/{set}")
     public ResponseEntity<String> findItemsBySetName(@PathVariable String set) {
         itemService.findItemsBySetName(set);
         return ResponseEntity.ok("Success");
@@ -78,23 +78,23 @@ public class ItemController {
 
     //update item information
 
-    @PutMapping("/{id}/update")
-    public ResponseEntity<String> updateItemName(@PathVariable Long id, String name) {
-        itemService.updateName(id, name);
-        return ResponseEntity.ok("Success");
-    }
-
-    @PutMapping("/{id}/update")
-    public ResponseEntity<String> updateItemSerial(@PathVariable Long id, String serial) {
-        itemService.updateSerial(id, serial);
-        return ResponseEntity.ok("Success");
-    }
-
-    @PutMapping("/{id}/update")
-    public ResponseEntity<String> updateItemSet(@PathVariable Long id, String set) {
-        itemService.updateSet(id, set);
-        return ResponseEntity.ok("Success");
-    }
+//    @PutMapping("/{id}/update")
+//    public ResponseEntity<String> updateItemName(@PathVariable Long id, String name) {
+//        itemService.updateName(id, name);
+//        return ResponseEntity.ok("Success");
+//    }
+//
+//    @PutMapping("/{id}/update")
+//    public ResponseEntity<String> updateItemSerial(@PathVariable Long id, String serial) {
+//        itemService.updateSerial(id, serial);
+//        return ResponseEntity.ok("Success");
+//    }
+//
+//    @PutMapping("/{id}/update")
+//    public ResponseEntity<String> updateItemSet(@PathVariable Long id, String set) {
+//        itemService.updateSet(id, set);
+//        return ResponseEntity.ok("Success");
+//    }
 
 
 
