@@ -17,7 +17,7 @@ public class ItemDto{
 
     private String serial; //serial number - QR code
 
-    private StatusEnum statusEnum = StatusEnum.Available; //to specify if the item is in available, not available or damaged.
+    private StatusEnum statusEnum = StatusEnum.AVAILABLE; //to specify if the item is in available, not available or damaged.
 
     private String set;
 

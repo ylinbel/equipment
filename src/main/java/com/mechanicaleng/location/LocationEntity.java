@@ -1,8 +1,6 @@
 package com.mechanicaleng.location;
 
 
-import com.mechanicaleng.item.ItemDto;
-import com.mechanicaleng.item.ItemEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +15,7 @@ import javax.persistence.Id;
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "location")
 public class LocationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

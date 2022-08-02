@@ -63,8 +63,9 @@ public class ItemController {
 
 	// find all damaged items
 	@GetMapping("/find-by-status/{status}")
-	public ResponseEntity<List<ItemDto>> findAllDamagedItems(@PathVariable StatusEnum status) {
-		List<ItemDto> itemsByStatus = itemService.findItemsByStatus(status);
+	public ResponseEntity<List<ItemDto>> findAllDamagedItems(@PathVariable String status) {
+		List<ItemDto> itemsByStatus = itemService.findItemsByStatus(StatusEnum.valueOf(status));
+
 		return ResponseEntity.ok(itemsByStatus);
 	}
 

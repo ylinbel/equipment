@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "item")
 public class ItemEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +25,9 @@ public class ItemEntity {
 	private StatusEnum statusEnum; //to specify if the item is in available, not available or damaged.
 
 	private String setNum; // name of the set
+
+//	@OneToOne(cascade = CascadeType.ALL)
+//	private LocationEntity location;
 
 //    private String Location;
 //
