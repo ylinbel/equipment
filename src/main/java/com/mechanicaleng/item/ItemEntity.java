@@ -1,5 +1,6 @@
 package com.mechanicaleng.item;
 
+import com.mechanicaleng.location.LocationEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,8 +27,8 @@ public class ItemEntity {
 
 	private String setNum; // name of the set
 
-//	@OneToOne(cascade = CascadeType.ALL)
-//	private LocationEntity location;
+	@ManyToOne(cascade = CascadeType.ALL)
+	private LocationEntity location;
 
 //    private String Location;
 //
