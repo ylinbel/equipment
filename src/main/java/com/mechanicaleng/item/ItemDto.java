@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ItemDto{
 
+    private Long id;
+
     private String name;
 
     private String serial; //serial number - QR code

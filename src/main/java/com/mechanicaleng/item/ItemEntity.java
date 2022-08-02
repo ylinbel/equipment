@@ -13,13 +13,13 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 public class ItemEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private String name;
+	private String name;
 
-    private String serial; //serial number - QR code
+	private String serial; //serial number - QR code
 
 	@Enumerated(value = EnumType.STRING)
 	private StatusEnum statusEnum; //to specify if the item is in available, not available or damaged.
@@ -31,7 +31,18 @@ public class ItemEntity {
 //    private String Category;
 
 
-    public static ItemEntity fromDto(ItemDto itemDto) {
+	public static ItemEntity fromDto(ItemDto itemDto) {
 		return ItemEntity.builder().name(itemDto.getName()).serial(itemDto.getSerial()).statusEnum(itemDto.getStatusEnum()).setNum(itemDto.getSet()).build();
-    }
+	}
+
+	public ItemDto toDto() {
+		return ItemDto.builder().name(this.getName()).serial(this.getSerial()).statusEnum(this.getStatusEnum()).set(this.getSetNum()).build();
+	}
+
+	public void updateFromDto(ItemDto itemDto) {
+		this.setSetNum(itemDto.getSet());
+		this.setStatusEnum(itemDto.getStatusEnum());
+		this.setName(itemDto.getName());
+		this.setSerial(itemDto.getSerial());
+	}
 }
