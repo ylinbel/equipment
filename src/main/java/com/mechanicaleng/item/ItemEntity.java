@@ -20,33 +20,41 @@ public class ItemEntity {
 
 	private String name;
 
+	@Column(unique=true)
 	private String serial; //serial number - QR code
 
 	@Enumerated(value = EnumType.STRING)
 	private StatusEnum statusEnum; //to specify if the item is in available, not available or damaged.
 
-	private String setNum; // name of the set
+	private String setName; // name of the set
 
 	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "location_id")
 	private LocationEntity location;
 
-//    private String Location;
+
+//  private String Category;
 //
-//    private String Category;
+//	private User user;
+//
+//	private Time timeToReturn;
+
+
 
 
 	public static ItemEntity fromDto(ItemDto itemDto) {
-		return ItemEntity.builder().name(itemDto.getName()).serial(itemDto.getSerial()).statusEnum(itemDto.getStatusEnum()).setNum(itemDto.getSet()).build();
+		return ItemEntity.builder().name(itemDto.getName()).serial(itemDto.getSerial()).statusEnum(itemDto.getStatusEnum()).setName(itemDto.getSetName()).location(itemDto.getLocation()).build();
 	}
 
 	public ItemDto toDto() {
-		return ItemDto.builder().name(this.getName()).serial(this.getSerial()).statusEnum(this.getStatusEnum()).set(this.getSetNum()).build();
+		return ItemDto.builder().name(this.getName()).serial(this.getSerial()).statusEnum(this.getStatusEnum()).setName(this.getSetName()).location(this.getLocation()).build();
 	}
 
 	public void updateFromDto(ItemDto itemDto) {
-		this.setSetNum(itemDto.getSet());
+		this.setSetName(itemDto.getSetName());
 		this.setStatusEnum(itemDto.getStatusEnum());
 		this.setName(itemDto.getName());
 		this.setSerial(itemDto.getSerial());
+		this.setLocation(itemDto.getLocation());
 	}
 }

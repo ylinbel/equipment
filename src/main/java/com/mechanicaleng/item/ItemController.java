@@ -19,6 +19,8 @@ public class ItemController {
 		return ResponseEntity.ok("Success");
 	}
 
+	//update item information
+
 	@PutMapping
 	public ResponseEntity<String> updateItem(@RequestBody ItemDto itemDto) {
 		Boolean result = itemService.updateItem(itemDto);
@@ -65,29 +67,15 @@ public class ItemController {
 	@GetMapping("/find-by-status/{status}")
 	public ResponseEntity<List<ItemDto>> findAllDamagedItems(@PathVariable String status) {
 		List<ItemDto> itemsByStatus = itemService.findItemsByStatus(StatusEnum.valueOf(status));
-
 		return ResponseEntity.ok(itemsByStatus);
 	}
 
-	//update item information
-
-//    @PutMapping("/{id}/update")
-//    public ResponseEntity<String> updateItemName(@PathVariable Long id, String name) {
-//        itemService.updateName(id, name);
-//        return ResponseEntity.ok("Success");
-//    }
-//
-//    @PutMapping("/{id}/update")
-//    public ResponseEntity<String> updateItemSerial(@PathVariable Long id, String serial) {
-//        itemService.updateSerial(id, serial);
-//        return ResponseEntity.ok("Success");
-//    }
-//
-//    @PutMapping("/{id}/update")
-//    public ResponseEntity<String> updateItemSet(@PathVariable Long id, String set) {
-//        itemService.updateSet(id, set);
-//        return ResponseEntity.ok("Success");
-//    }
+	//find all items in the same location
+//	@GetMapping("/location/{location}")
+//	public ResponseEntity<List<ItemDto>> findByLocation(@PathVariable long location) {
+//		List<ItemDto> itemsByLocation = itemService.findByLocation(location);
+//		return ResponseEntity.ok(itemsByLocation);
+//	}
 
 
 //    @GetMapping ("/items/{id}")

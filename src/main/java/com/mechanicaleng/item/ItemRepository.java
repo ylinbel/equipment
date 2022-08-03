@@ -1,5 +1,6 @@
 package com.mechanicaleng.item;
 
+import com.mechanicaleng.location.LocationEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,8 @@ public interface ItemRepository extends JpaRepository<ItemEntity, Long> {
 
     public List<ItemEntity> findAllByStatusEnumEquals(StatusEnum statusEnum);
 
-    public List<ItemEntity> findItemEntitiesBySetNumLike(String setNum);
+    public List<ItemEntity> findItemEntitiesBySetNameLike(String setNum);
+
+    public List<ItemEntity> findItemEntitiesByLocationEquals(Long id);
 
 }

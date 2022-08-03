@@ -20,33 +20,12 @@ public class ItemService {
 		itemRepository.save(itemEntity);
 	}
 
-	//delete item
+    //delete item
 
 	public void deleteWithId(Long id) {
 		itemRepository.deleteById(id);
 //		itemRepository.deleteByIdEquals(id);
 	}
-
-
-	//set item status
-
-//	public void borrowItem(Long id) {
-//		ItemEntity itemEntity = itemRepository.findItemEntityByIdEquals(id);
-//		itemEntity.setStatusEnum(StatusEnum.NotAvailable);
-//		itemRepository.save(itemEntity);
-//	}
-//
-//	public void returnItem(Long id) {
-//		ItemEntity itemEntity = itemRepository.findItemEntityByIdEquals(id);
-//		itemEntity.setStatusEnum(StatusEnum.Available);
-//		itemRepository.save(itemEntity);
-//	}
-//
-//	public void reportDamaged(Long id) {
-//		ItemEntity itemEntity = itemRepository.findItemEntityByIdEquals(id);
-//		itemEntity.setStatusEnum(StatusEnum.Damaged);
-//		itemRepository.save(itemEntity);
-//	}
 
 	//search item
 	public ItemDto findItemsWithId(long id) {
@@ -73,7 +52,13 @@ public class ItemService {
     }
 
 	public List<ItemDto> findItemsBySetName(String set) {
-		List<ItemEntity> entities = itemRepository.findItemEntitiesBySetNumLike(set);
+		List<ItemEntity> entities = itemRepository.findItemEntitiesBySetNameLike(set);
+		return getItemDtos(entities);
+	}
+
+	//find all items in the same location
+	public List<ItemDto> findByLocation(long locationId) {
+		List<ItemEntity> entities = itemRepository.findItemEntitiesByLocationEquals(locationId);
 		return getItemDtos(entities);
 	}
 
@@ -84,25 +69,6 @@ public class ItemService {
 		return getItemDtos(entities);
 	}
 
-	// update item information
-
-//	public void updateName(long id, String name) {
-//		ItemEntity itemEntity = itemRepository.findItemEntityByIdEquals(id);
-//		itemEntity.setName(name);
-//		itemRepository.save(itemEntity);
-//	}
-//
-//	public void updateSerial(long id, String serial) {
-//		ItemEntity itemEntity = itemRepository.findItemEntityByIdEquals(id);
-//		itemEntity.setSerial(serial);
-//		itemRepository.save(itemEntity);
-//	}
-//
-//	public void updateSet(long id, String set) {
-//		ItemEntity itemEntity = itemRepository.findItemEntityByIdEquals(id);
-//		itemEntity.setSetNum(set);
-//		itemRepository.save(itemEntity);
-//	}
 
 	public Boolean updateItem(ItemDto itemDto) {
 		Optional<ItemEntity> optItemEntity = itemRepository.findById(itemDto.getId());
