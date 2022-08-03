@@ -23,7 +23,8 @@ public class ItemService {
 	//delete item
 
 	public void deleteWithId(Long id) {
-		itemRepository.deleteByIdEquals(id);
+		itemRepository.deleteById(id);
+//		itemRepository.deleteByIdEquals(id);
 	}
 
 
