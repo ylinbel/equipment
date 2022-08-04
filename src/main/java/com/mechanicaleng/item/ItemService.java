@@ -28,7 +28,6 @@ public class ItemService {
 
 	public void deleteWithId(Long id) {
 		itemRepository.deleteById(id);
-//		itemRepository.deleteByIdEquals(id);
 	}
 
 	//search item

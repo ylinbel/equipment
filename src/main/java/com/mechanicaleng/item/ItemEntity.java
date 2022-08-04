@@ -36,9 +36,16 @@ public class ItemEntity {
 
 //  private String Category;
 //
-//	private User user;
+//	private User current user;
 //
 //	private Time timeToReturn;
+/*
+	borrow date
+
+	return date
+
+	time period 
+ */
 
 
 
