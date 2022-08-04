@@ -1,5 +1,7 @@
 package com.mechanicaleng.item;
 
+import com.mechanicaleng.location.LocationEntity;
+import com.mechanicaleng.location.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,8 @@ public class ItemService {
 	@Autowired
 	public ItemRepository itemRepository;
 
+	@Autowired
+	public LocationRepository locationRepository;
 
 	//add item
 
@@ -58,7 +62,8 @@ public class ItemService {
 
 	//find all items in the same location
 	public List<ItemDto> findByLocation(long locationId) {
-		List<ItemEntity> entities = itemRepository.findItemEntitiesByLocationEquals(locationId);
+		LocationEntity location = locationRepository.findLocationEntityByIdEquals(locationId).get();
+		List<ItemEntity> entities = itemRepository.findItemEntitiesByLocationEquals(location);
 		return getItemDtos(entities);
 	}
 
@@ -78,4 +83,21 @@ public class ItemService {
         itemRepository.save(itemEntity);
 		return true;
     }
+
+	//find all electronics
+	public List<ItemDto> findAllElectronics() {
+		List<ItemEntity> entities = itemRepository.findItemEntitiesBySerialStartingWith("E");
+		return getItemDtos(entities);
+	}
+
+	//find all electronics acquisition
+	public List<ItemDto> findAllElectronicsAcquisition() {
+		List<ItemEntity> entities = itemRepository.findItemEntitiesBySerialStartingWith("EQ");
+		return getItemDtos(entities);
+	}
+
+
+
+
+
 }

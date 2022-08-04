@@ -1,5 +1,6 @@
 package com.mechanicaleng.item;
 
+import com.mechanicaleng.location.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,9 @@ import java.util.List;
 public class ItemController {
 	@Autowired
 	ItemService itemService;
+
+	@Autowired
+	LocationService locationService;
 
 	@PostMapping
 	public ResponseEntity<String> addItem(@RequestBody ItemDto itemDto) {
@@ -37,6 +41,12 @@ public class ItemController {
 		itemService.deleteWithId(id);
 		return ResponseEntity.ok("Deleted");
 	}
+
+//	@DeleteMapping("/{id}")
+//	public ResponseEntity<String> deleteByLocationId(@PathVariable Long id) {
+//		itemService.deleteByLocationEquals(id);
+//		return ResponseEntity.ok("Deleted");
+//	}
 
 	//search item
 	@GetMapping("/{id}")
@@ -71,16 +81,15 @@ public class ItemController {
 	}
 
 	//find all items in the same location
-//	@GetMapping("/location/{location}")
-//	public ResponseEntity<List<ItemDto>> findByLocation(@PathVariable long location) {
-//		List<ItemDto> itemsByLocation = itemService.findByLocation(location);
-//		return ResponseEntity.ok(itemsByLocation);
-//	}
+	@GetMapping("/find-by-location/{location-id}")
+	public ResponseEntity<List<ItemDto>> findByLocation(@PathVariable(value = "location-id") long location) {
+		List<ItemDto> itemsByLocation = itemService.findByLocation(location);
+		return itemsByLocation != null ? ResponseEntity.ok(itemsByLocation) : ResponseEntity.notFound().build();
+	}
+
+	// find item category
+
+	// f
 
 
-//    @GetMapping ("/items/{id}")
-//    @GetMapping ("/items/bowwer")
-//   @PathVariable
-//
-//    @PathParam()
 }

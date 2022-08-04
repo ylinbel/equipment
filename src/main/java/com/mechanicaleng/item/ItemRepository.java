@@ -23,6 +23,10 @@ public interface ItemRepository extends JpaRepository<ItemEntity, Long> {
 
     public List<ItemEntity> findItemEntitiesBySetNameLike(String setNum);
 
-    public List<ItemEntity> findItemEntitiesByLocationEquals(Long id);
+    public List<ItemEntity> findItemEntitiesByLocationEquals(LocationEntity location);
 
+    @Transactional
+    public void deleteByLocationEquals(Long location);
+
+    public List<ItemEntity> findItemEntitiesBySerialStartingWith(String letters);
 }

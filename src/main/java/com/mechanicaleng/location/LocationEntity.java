@@ -29,15 +29,15 @@ public class LocationEntity {
 
     private String cabinet;
 
-    @OneToMany(targetEntity = ItemEntity.class, mappedBy = "location")
-    private List<ItemEntity> items;
+//    @OneToMany(targetEntity = ItemEntity.class, mappedBy = "location")
+//    private List<ItemEntity> items;
 
     public static LocationEntity fromDto(LocationDto locationDto) {
-        return LocationEntity.builder().name(locationDto.getName()).serial(locationDto.getSerial()).layer(locationDto.getLayer()).cabinet(locationDto.getCabinet()).items(locationDto.getItems()).build();
+        return LocationEntity.builder().name(locationDto.getName()).serial(locationDto.getSerial()).layer(locationDto.getLayer()).cabinet(locationDto.getCabinet()).build();
     }
 
     public LocationDto toDto() {
-        return LocationDto.builder().name(this.getName()).serial(this.getSerial()).layer(this.getLayer()).cabinet(this.getCabinet()).items(this.getItems()).build();
+        return LocationDto.builder().name(this.getName()).serial(this.getSerial()).layer(this.getLayer()).cabinet(this.getCabinet()).build();
     }
 
     public void updateFromDto(LocationDto locationDto) {
@@ -45,6 +45,6 @@ public class LocationEntity {
         this.setSerial(locationDto.getSerial());
         this.setCabinet(locationDto.getCabinet());
         this.setLayer(locationDto.getLayer());
-        this.setItems(locationDto.getItems());
+//        this.setItems(locationDto.getItems());
     }
 }
