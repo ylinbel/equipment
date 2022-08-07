@@ -25,6 +25,10 @@ public interface ItemRepository extends JpaRepository<ItemEntity, Long> {
 
     public List<ItemEntity> findItemEntitiesByLocationEquals(LocationEntity location);
 
+    public List<ItemEntity> findItemEntitiesByCategoryContaining(String category);
+
+    public List<ItemEntity> findItemEntitiesByCategoryLike(String category);
+
     @Transactional
     public void deleteByLocationEquals(Long location);
 

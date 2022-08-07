@@ -30,11 +30,11 @@ public class ItemEntity {
 
 	private String setName; // name of the set
 
-	@ManyToOne(cascade = CascadeType.ALL)
+//	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private LocationEntity location;
 
-
-//  private String Category;
+	private String category;
 //
 //	private User current user;
 //
@@ -44,18 +44,18 @@ public class ItemEntity {
 
 	return date
 
-	time period 
+	time period
  */
 
 
 
 
 	public static ItemEntity fromDto(ItemDto itemDto) {
-		return ItemEntity.builder().name(itemDto.getName()).serial(itemDto.getSerial()).statusEnum(itemDto.getStatusEnum()).setName(itemDto.getSetName()).location(itemDto.getLocation()).build();
+		return ItemEntity.builder().name(itemDto.getName()).serial(itemDto.getSerial()).statusEnum(itemDto.getStatusEnum()).setName(itemDto.getSetName()).category(itemDto.getCategory()).location(itemDto.getLocation()).build();
 	}
 
 	public ItemDto toDto() {
-		return ItemDto.builder().name(this.getName()).serial(this.getSerial()).statusEnum(this.getStatusEnum()).setName(this.getSetName()).location(this.getLocation()).build();
+		return ItemDto.builder().name(this.getName()).serial(this.getSerial()).statusEnum(this.getStatusEnum()).setName(this.getSetName()).location(this.getLocation()).category(this.getCategory()).build();
 	}
 
 	public void updateFromDto(ItemDto itemDto) {
@@ -64,5 +64,6 @@ public class ItemEntity {
 		this.setName(itemDto.getName());
 		this.setSerial(itemDto.getSerial());
 		this.setLocation(itemDto.getLocation());
+		this.setCategory(itemDto.getCategory());
 	}
 }
