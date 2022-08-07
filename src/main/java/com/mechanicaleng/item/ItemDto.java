@@ -28,6 +28,4 @@ public class ItemDto{
     private LocationEntity location;
 
     private String category;
-
-//    private String Category;
 }

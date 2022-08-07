@@ -1,6 +1,7 @@
 package com.mechanicaleng.user;
 
 import com.mechanicaleng.item.ItemEntity;
+import com.mechanicaleng.log.LogEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,7 +26,7 @@ public class UserDto {
 
     private Date utilDate;
 
-    private List<ItemEntity> itemList;
+    private List<LogEntity> logList;
 
     private String email;
 }

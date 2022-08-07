@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 
@@ -35,10 +36,13 @@ public class ItemEntity {
 	private LocationEntity location;
 
 	private String category;
-//
+
+	@Enumerated(value = EnumType.STRING)
+	private ReturnTypeEnum returnTypeEnum = ReturnTypeEnum.DAILY;
+
+
 //	private User current user;
 //
-//	private Time timeToReturn;
 /*
 	borrow date
 

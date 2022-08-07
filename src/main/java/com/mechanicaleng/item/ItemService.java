@@ -46,7 +46,7 @@ public class ItemService {
 		return getItemDtos(entities);
     }
 
-	private List<ItemDto> getItemDtos(List<ItemEntity> entities) {
+	public static List<ItemDto> getItemDtos(List<ItemEntity> entities) {
 		List<ItemDto> itemDtoList = new ArrayList<>();
 		entities.forEach(itemEntity -> {
 			itemDtoList.add(itemEntity.toDto());
@@ -68,8 +68,8 @@ public class ItemService {
 
 
 	//find all damaged items
-	public List<ItemDto> findItemsByStatus(StatusEnum status) {
-		List<ItemEntity> entities = itemRepository.findAllByStatusEnumEquals(status);
+	public List<ItemDto> findAllDamagedItems() {
+		List<ItemEntity> entities = itemRepository.findAllByStatusEnumEquals(StatusEnum.DAMAGED);
 		return getItemDtos(entities);
 	}
 
