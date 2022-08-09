@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/log")
 public class LogController {
     @Autowired
     LogService logService;
 
-    @PostMapping("/log")
+    @PostMapping
     public ResponseEntity<String> addLog(@RequestBody LogDto logDto) {
         logService.addLog(logDto);
         return ResponseEntity.ok("Success");
     }
 
     //update log, mainly for changing isCurrent after item is returned
-    @PutMapping("/log")
+    @PutMapping
     public ResponseEntity<String> updateLog(@RequestBody LogDto logDto) {
         Boolean result = logService.updateLog(logDto);
         if (result) {
@@ -32,9 +32,9 @@ public class LogController {
         }
     }
 
-    @GetMapping("users/{user-id}/borrow")
-    public ResponseEntity<List<ItemDto>> findAllBorrowItems(@PathVariable(value = "user-id") Long user_id) {
-        List<ItemDto> itemDtoList = logService.findBorrowList(user_id);
+    @GetMapping("/find-borrow-list/{user-id}")
+    public ResponseEntity<List<ItemEntity>> findAllBorrowItems(@PathVariable(value = "user-id") Long id) {
+        List<ItemEntity> itemDtoList = logService.findBorrowList(id);
         return itemDtoList != null ? ResponseEntity.ok(itemDtoList) : ResponseEntity.notFound().build();
     }
 }

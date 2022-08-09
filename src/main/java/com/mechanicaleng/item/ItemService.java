@@ -26,6 +26,7 @@ public class ItemService {
 	}
 
     //delete item
+
 	public void deleteItemWithId(Long id) {
 		itemRepository.deleteById(id);
 	}
@@ -46,7 +47,7 @@ public class ItemService {
 		return getItemDtos(entities);
     }
 
-	public static List<ItemDto> getItemDtos(List<ItemEntity> entities) {
+	public List<ItemDto> getItemDtos(List<ItemEntity> entities) {
 		List<ItemDto> itemDtoList = new ArrayList<>();
 		entities.forEach(itemEntity -> {
 			itemDtoList.add(itemEntity.toDto());
@@ -71,6 +72,7 @@ public class ItemService {
 		}
 	}
 
+
 	//find all damaged items
 	public List<ItemDto> findItemsByStatus(StatusEnum status) {
 		List<ItemEntity> entities = itemRepository.findAllByStatusEnumEquals(status);
@@ -91,4 +93,5 @@ public class ItemService {
 		List<ItemEntity> entities = itemRepository.findItemEntitiesBySerialStartingWith(serial);
 		return getItemDtos(entities);
 	}
+
 }

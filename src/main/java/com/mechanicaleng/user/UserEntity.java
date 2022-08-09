@@ -28,11 +28,8 @@ public class UserEntity {
     @Temporal(TemporalType.DATE)
     private Date utilDate;
 
-//    @OneToMany
-//    private List<LogEntity> logList;
-
     private String email;
-    // email
+
 
     public static UserEntity fromDto(UserDto userDto) {
         return UserEntity.builder().name(userDto.getName()).password(userDto.getPassword()).userTypeEnum(userDto.getUserTypeEnum()).utilDate(userDto.getUtilDate()).email(userDto.getEmail()).build();
