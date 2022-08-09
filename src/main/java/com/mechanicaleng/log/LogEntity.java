@@ -20,7 +20,7 @@ public class LogEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     private UserEntity user;
 
     @ManyToOne
@@ -33,7 +33,6 @@ public class LogEntity {
     user then IsCurrent will be true.
     */
     private Boolean isCurrent;
-
 
 
     public static LogEntity fromDto(LogDto logDto) {
@@ -49,11 +48,4 @@ public class LogEntity {
         this.setUser(logDto.getUser());
         this.setIsCurrent(logDto.getIsCurrent());
     }
-
-
-
-
-
-
-
 }
