@@ -1,13 +1,10 @@
 package com.mechanicaleng.item;
 
-import com.mechanicaleng.location.LocationEntity;
+import com.mechanicaleng.location.LocationDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Data
 @Builder(toBuilder = true)
@@ -25,7 +22,7 @@ public class ItemDto{
 
     private String setName;
 
-    private LocationEntity location;
+	private LocationDto location;
 
     private String category;
 }

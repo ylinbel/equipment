@@ -2,14 +2,11 @@ package com.mechanicaleng.location;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mechanicaleng.item.ItemDto;
 import com.mechanicaleng.item.ItemEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.List;
@@ -37,11 +34,11 @@ public class LocationEntity {
     private List<ItemEntity> items;
 
     public static LocationEntity fromDto(LocationDto locationDto) {
-        return LocationEntity.builder().name(locationDto.getName()).serial(locationDto.getSerial()).layer(locationDto.getLayer()).cabinet(locationDto.getCabinet()).items(locationDto.getItems()).build();
+		return LocationEntity.builder().name(locationDto.getName()).serial(locationDto.getSerial()).layer(locationDto.getLayer()).cabinet(locationDto.getCabinet()).build();
     }
 
     public LocationDto toDto() {
-        return LocationDto.builder().name(this.getName()).serial(this.getSerial()).layer(this.getLayer()).cabinet(this.getCabinet()).items(this.getItems()).build();
+		return LocationDto.builder().name(this.getName()).serial(this.getSerial()).layer(this.getLayer()).cabinet(this.getCabinet()).build();
     }
 
     public void updateFromDto(LocationDto locationDto) {
@@ -49,6 +46,5 @@ public class LocationEntity {
         this.setSerial(locationDto.getSerial());
         this.setCabinet(locationDto.getCabinet());
         this.setLayer(locationDto.getLayer());
-        this.setItems(locationDto.getItems());
     }
 }

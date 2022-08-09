@@ -5,9 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 
@@ -31,7 +28,6 @@ public class ItemEntity {
 
 	private String setName; // name of the set
 
-//	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@ManyToOne(fetch=FetchType.EAGER)
 	private LocationEntity location;
 
@@ -55,11 +51,11 @@ public class ItemEntity {
 
 
 	public static ItemEntity fromDto(ItemDto itemDto) {
-		return ItemEntity.builder().name(itemDto.getName()).serial(itemDto.getSerial()).statusEnum(itemDto.getStatusEnum()).setName(itemDto.getSetName()).category(itemDto.getCategory()).location(itemDto.getLocation()).build();
+		return ItemEntity.builder().name(itemDto.getName()).serial(itemDto.getSerial()).statusEnum(itemDto.getStatusEnum()).setName(itemDto.getSetName()).category(itemDto.getCategory()).build();
 	}
 
 	public ItemDto toDto() {
-		return ItemDto.builder().name(this.getName()).serial(this.getSerial()).statusEnum(this.getStatusEnum()).setName(this.getSetName()).location(this.getLocation()).category(this.getCategory()).build();
+		return ItemDto.builder().name(this.getName()).serial(this.getSerial()).statusEnum(this.getStatusEnum()).setName(this.getSetName()).location(this.getLocation().toDto()).category(this.getCategory()).build();
 	}
 
 	public void updateFromDto(ItemDto itemDto) {
@@ -67,7 +63,6 @@ public class ItemEntity {
 		this.setStatusEnum(itemDto.getStatusEnum());
 		this.setName(itemDto.getName());
 		this.setSerial(itemDto.getSerial());
-		this.setLocation(itemDto.getLocation());
 		this.setCategory(itemDto.getCategory());
 	}
 }

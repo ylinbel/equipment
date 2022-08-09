@@ -1,13 +1,10 @@
 package com.mechanicaleng.location;
 
 
-import com.mechanicaleng.item.ItemEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @Builder(toBuilder = true)
@@ -24,7 +21,5 @@ public class LocationDto {
     private Integer layer;
 
     private String cabinet;
-
-    private List<ItemEntity> items;
 
 }
