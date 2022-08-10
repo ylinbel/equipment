@@ -11,17 +11,15 @@ import java.util.Date;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
+public class UserDisplayDto {
 
-    private long id;
+	private long id;
 
-    private String name;
+	private String name;
 
-    private String password;
+	private UserTypeEnum userTypeEnum;
 
-    private UserTypeEnum userTypeEnum;
+	private Date utilDate;
 
-    private Date utilDate;
-
-    private String email;
+	private String email;
 }

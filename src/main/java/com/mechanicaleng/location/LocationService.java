@@ -1,12 +1,9 @@
 package com.mechanicaleng.location;
 
 
-import com.mechanicaleng.item.ItemDto;
-import com.mechanicaleng.item.ItemEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,14 +25,14 @@ public class LocationService {
     //delete location
 
     public void deleteWithId(long id) {
-        locationRepository.deleteByIdEquals(id);
+		locationRepository.deleteById(id);
     }
 
 
     //update location
 
     public Boolean updateLocation(LocationDto locationDto) {
-        Optional<LocationEntity> opLocationEntity = locationRepository.findLocationEntityByIdEquals(locationDto.getId());
+		Optional<LocationEntity> opLocationEntity = locationRepository.findById(locationDto.getId());
         if (opLocationEntity.isEmpty()) return false;
         LocationEntity locationEntity = opLocationEntity.get();
         locationEntity.updateFromDto(locationDto);
@@ -45,7 +42,7 @@ public class LocationService {
 
     //find by id
     public LocationEntity findById(Long id) {
-        Optional<LocationEntity> location = locationRepository.findLocationEntityByIdEquals(id);
+		Optional<LocationEntity> location = locationRepository.findById(id);
         return location.isPresent() ? location.get() : null;
     }
 
