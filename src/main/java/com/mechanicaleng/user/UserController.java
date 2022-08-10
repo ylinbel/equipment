@@ -1,11 +1,8 @@
 package com.mechanicaleng.user;
 
-import com.mechanicaleng.item.ItemDto;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,14 +22,14 @@ public class UserController {
 
     // delete user
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteItemEntity(@PathVariable Long id) {
+    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
         userService.deleteWithId(id);
         return ResponseEntity.ok("Deleted");
     }
 
     //update user information
     @PutMapping
-    public ResponseEntity<String> updateItem(@RequestBody UserDto userDto) {
+    public ResponseEntity<String> updateUser(@RequestBody UserDto userDto) {
         Boolean result = userService.updateUser(userDto);
         if (result) {
             return ResponseEntity.ok("Success");
@@ -42,32 +39,15 @@ public class UserController {
     }
 
     @GetMapping("/find-by-name/{name}")
-    public ResponseEntity<List<UserDto>> findItemWithName(@PathVariable String name) {
-        List<UserDto> user = userService.findUserWithName(name);
+    public ResponseEntity<List<UserDisplayDto>> findUserWithName(@PathVariable String name) {
+        List<UserDisplayDto> user = userService.findUserWithName(name);
         return ResponseEntity.ok(user);
     }
 
-    @GetMapping("/find-all-manager")
-    public ResponseEntity<List<UserDto>> findAllManager() {
-        List<UserDto> user = userService.findAllManagers();
-        return ResponseEntity.ok(user);
+    @GetMapping("/find-by-user-type/{userType}")
+    public ResponseEntity<List<UserDisplayDto>> findUserWithUserType(@PathVariable String userType) {
+        List<UserDisplayDto> userList = userService.findUsersWithUserType(UserTypeEnum.valueOf(userType));
+        return ResponseEntity.ok(userList);
     }
-
-    @GetMapping("/find-all-superuser")
-    public ResponseEntity<List<UserDto>> findAllSuperUser() {
-        List<UserDto> user = userService.findAllSuperUsers();
-        return ResponseEntity.ok(user);
-    }
-
-    @GetMapping("/find-all-standard-user")
-    public ResponseEntity<List<UserDto>> findAllStandardUser() {
-        List<UserDto> user = userService.findAllStandardUsers();
-        return ResponseEntity.ok(user);
-    }
-
-
-
-
-
 
 }

@@ -35,8 +35,8 @@ public class UserEntity {
         return UserEntity.builder().name(userDto.getName()).password(userDto.getPassword()).userTypeEnum(userDto.getUserTypeEnum()).utilDate(userDto.getUtilDate()).email(userDto.getEmail()).build();
     }
 
-    public UserDto toDto() {
-        return UserDto.builder().name(this.getName()).password(this.getPassword()).userTypeEnum(this.getUserTypeEnum()).utilDate(this.getUtilDate()).email(this.getEmail()).build();
+    public UserDisplayDto toDto() {
+        return UserDisplayDto.builder().name(this.getName()).userTypeEnum(this.getUserTypeEnum()).utilDate(this.getUtilDate()).email(this.getEmail()).build();
     }
 
     public void updateFromDto(UserDto userDto) {
@@ -44,7 +44,6 @@ public class UserEntity {
         this.setUserTypeEnum(userDto.getUserTypeEnum());
         this.setName(userDto.getName());
         this.setUtilDate(userDto.getUtilDate());
-//        this.setLogList(userDto.getLogList());
         this.setEmail(userDto.getEmail());
     }
 

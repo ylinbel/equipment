@@ -1,6 +1,5 @@
 package com.mechanicaleng.user;
 
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,40 +35,22 @@ public class UserService {
     }
 
     //find user with name
-    public List<UserDto> findUserWithName(String name) {
+    public List<UserDisplayDto> findUserWithName(String name) {
         List<UserEntity> entities = userRepository.findUserEntitiesByNameLike(name);
         return getUserDtos(entities);
     }
 
-    //find all managers
-    public List<UserDto> findAllManagers() {
-        List<UserEntity> entities = userRepository.findUserEntitiesByUserTypeEnumEquals(UserTypeEnum.MANAGER);
+    public List<UserDisplayDto> findUsersWithUserType(UserTypeEnum userTypeEnum) {
+        List<UserEntity> entities = userRepository.findUserEntitiesByUserTypeEnumEquals(userTypeEnum);
         return getUserDtos(entities);
     }
 
-    //find all super users
-    public List<UserDto> findAllSuperUsers() {
-        List<UserEntity> entities = userRepository.findUserEntitiesByUserTypeEnumEquals(UserTypeEnum.SUPER_USER);
-        return getUserDtos(entities);
-    }
-
-    //find all standard users
-    public List<UserDto> findAllStandardUsers() {
-        List<UserEntity> entities = userRepository.findUserEntitiesByUserTypeEnumEquals(UserTypeEnum.STANDARD_USER);
-        return getUserDtos(entities);
-    }
-
-
-
-
-
-    private List<UserDto> getUserDtos(List<UserEntity> entities) {
-        List<UserDto> userDtoList = new ArrayList<>();
+    private List<UserDisplayDto> getUserDtos(List<UserEntity> entities) {
+        List<UserDisplayDto> userDtoList = new ArrayList<>();
         entities.forEach(userEntity -> {
             userDtoList.add(userEntity.toDto());
         });
         return userDtoList;
     }
-
 
 }
