@@ -1,12 +1,10 @@
-package com.mechanicaleng.log;
+package com.mechanicaleng.item;
 
-import com.mechanicaleng.user.UserDto;
+import com.mechanicaleng.user.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import com.mechanicaleng.item.ItemEntity;
-import com.mechanicaleng.user.UserEntity;
 
 import javax.persistence.*;
 

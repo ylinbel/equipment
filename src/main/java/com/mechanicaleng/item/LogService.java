@@ -1,9 +1,5 @@
-package com.mechanicaleng.log;
+package com.mechanicaleng.item;
 
-import com.mechanicaleng.item.ItemDto;
-import com.mechanicaleng.item.ItemEntity;
-import com.mechanicaleng.item.ItemRepository;
-import com.mechanicaleng.item.ItemService;
 import com.mechanicaleng.user.UserEntity;
 import com.mechanicaleng.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
