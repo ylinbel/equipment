@@ -22,6 +22,7 @@ public class ItemService {
 
 	public void addItem(ItemDto itemDto) {
 		ItemEntity itemEntity = ItemEntity.fromDto(itemDto);
+		itemEntity.setLocation(locationRepository.findById(itemDto.getLocation().getId()).get());
 		itemRepository.save(itemEntity);
 	}
 
@@ -85,6 +86,7 @@ public class ItemService {
 		if (optItemEntity.isEmpty()) return false;
 		ItemEntity itemEntity = optItemEntity.get();
 		itemEntity.updateFromDto(itemDto);
+		itemEntity.setLocation(locationRepository.findById(itemDto.getLocation().getId()).get());
         itemRepository.save(itemEntity);
 		return true;
     }

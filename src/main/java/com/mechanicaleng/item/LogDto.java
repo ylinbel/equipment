@@ -1,6 +1,5 @@
-package com.mechanicaleng.log;
+package com.mechanicaleng.item;
 
-import com.mechanicaleng.item.ItemEntity;
 import com.mechanicaleng.user.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
