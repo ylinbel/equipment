@@ -25,4 +25,7 @@ public class ItemDto{
 	private LocationDto location;
 
     private String category;
+
+    private ReturnTypeEnum returnTypeEnum;
+
 }

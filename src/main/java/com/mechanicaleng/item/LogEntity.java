@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Data
 @Builder(toBuilder = true)
@@ -24,9 +25,13 @@ public class LogEntity {
     @ManyToOne
     private ItemEntity item;
 
+    private LocalDateTime startTime;
+
+    private Boolean overDue;
+
 
     public LogDto toDto() {
-        return LogDto.builder().user(this.getUser().toDto()).item(this.getItem().toDto()).build();
+        return LogDto.builder().user(this.getUser().toDto()).item(this.getItem().toDto()).startTime(this.getStartTime()).overDue(this.getOverDue()).build();
     }
 
 }

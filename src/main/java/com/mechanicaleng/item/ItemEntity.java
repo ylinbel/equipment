@@ -34,10 +34,9 @@ public class ItemEntity {
 	private String category;
 
 	@Enumerated(value = EnumType.STRING)
-	private ReturnTypeEnum returnTypeEnum = ReturnTypeEnum.DAILY;
+	private ReturnTypeEnum returnTypeEnum;
 
 
-//	private User current user;
 //
 /*
 	borrow date

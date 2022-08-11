@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder(toBuilder = true)
 @NoArgsConstructor
@@ -18,4 +20,9 @@ public class LogDto {
     private UserDisplayDto user;
 
     private ItemDto item;
+
+    private LocalDateTime startTime;
+
+    private Boolean overDue;
+
 }

@@ -24,4 +24,6 @@ public interface ItemRepository extends JpaRepository<ItemEntity, Long> {
 
     public List<ItemEntity> findItemEntitiesBySerialStartingWith(String letters);
 
+    public List<ItemEntity> findAllByStatusEnumEqualsAndReturnTypeEnumEquals(StatusEnum statusEnum, ReturnTypeEnum returnTypeEnum);
+
 }
