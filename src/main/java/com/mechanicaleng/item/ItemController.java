@@ -26,7 +26,7 @@ public class ItemController {
 		return ResponseEntity.ok("Success");
 	}
 
-	@PostMapping("/log/{use3r_id}/{item_id}")
+	@PostMapping("/log/{user_id}/{item_id}")
 	public ResponseEntity<String> addLog(@PathVariable(value = "user_id") Long userId,@PathVariable(value = "item_id") Long itemId) {
 		Boolean result = logService.addLog(userId, itemId);
 		if(result) {

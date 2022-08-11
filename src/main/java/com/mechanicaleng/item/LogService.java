@@ -29,17 +29,15 @@ public class LogService {
     public Boolean addLog(Long userId, Long itemId) {
         Optional<UserEntity> user = userRepository.findById(userId);
         Optional<ItemEntity> item = itemRepository.findById(itemId);
-        if (user.isPresent() && item.isPresent()) {
+        if (user.isPresent() && item.isPresent() && item.get().getStatusEnum().equals(StatusEnum.AVAILABLE)) {
             LogEntity logEntity = new LogEntity();
             logEntity.setUser(user.get());
             logEntity.setItem(item.get());
             logEntity.setOverDue(Boolean.FALSE);
             logEntity.setStartTime(LocalDateTime.now());
             logRepository.save(logEntity);
-//            ItemDto itemDto = item.get().toDto();
-//            itemDto.setStatusEnum(StatusEnum.NOT_AVAILABLE);
-//            Boolean updateItemDto = ItemService.updateItem(itemDto);
-//
+            item.get().setStatusEnum(StatusEnum.NOT_AVAILABLE);
+            itemRepository.save(item.get());
             return true;
         }
         return false;
