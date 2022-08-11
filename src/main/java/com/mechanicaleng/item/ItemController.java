@@ -17,10 +17,23 @@ public class ItemController {
 	@Autowired
 	LocationService locationService;
 
+	@Autowired
+	LogService logService;
+
 	@PostMapping
 	public ResponseEntity<String> addItem(@RequestBody ItemDto itemDto) {
 		itemService.addItem(itemDto);
 		return ResponseEntity.ok("Success");
+	}
+
+	@PostMapping("/log/{user_id}/{item_id}")
+	public ResponseEntity<String> addLog(@PathVariable(value = "user_id") Long userId,@PathVariable(value = "item_id") Long itemId) {
+		Boolean result = logService.addLog(userId, itemId);
+		if(result) {
+			return ResponseEntity.ok("Success");
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Bad Request");
+		}
 	}
 
 	//update item information
@@ -86,5 +99,13 @@ public class ItemController {
 		List<ItemDto> itemsByLocation = itemService.findByLocation(location);
 		return itemsByLocation != null ? ResponseEntity.ok(itemsByLocation) : ResponseEntity.notFound().build();
 	}
+
+	@GetMapping("log/get-borrow-list/{user_id}")
+	public ResponseEntity<List<LogDto>> getBorrowList(@PathVariable(value = "user_id") long id) {
+		List<LogDto> borrowList = logService.findBorrowList(id);
+		return borrowList != null ? ResponseEntity.ok(borrowList) : ResponseEntity.notFound().build();
+	}
+
+
 
 }

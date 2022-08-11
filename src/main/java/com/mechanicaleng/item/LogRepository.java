@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface LogRepository extends JpaRepository<LogEntity, Long> {
-    public List<LogEntity> findLogEntitiesByUserEqualsAndIsCurrentEquals(UserEntity user, Boolean isCurrent);
+    public List<LogEntity> findLogEntitiesByUserEquals(UserEntity user);
 
 
 }

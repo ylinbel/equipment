@@ -50,14 +50,4 @@ public class UserController {
         return ResponseEntity.ok(userList);
     }
 
-    @GetMapping("/find-all-standard-user")
-    public ResponseEntity<List<UserDto>> findAllStandardUser() {
-        List<UserDto> user = userService.findAllStandardUsers();
-        return ResponseEntity.ok(user);
-    }
-
-
-
-
-
 }

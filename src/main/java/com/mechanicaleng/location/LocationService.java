@@ -32,7 +32,7 @@ public class LocationService {
     //update location
 
     public Boolean updateLocation(LocationDto locationDto) {
-		Optional<LocationEntity> opLocationEntity = locationRepository.findById(locationDto.getId());
+        Optional<LocationEntity> opLocationEntity = locationRepository.findById(locationDto.getId());
         if (opLocationEntity.isEmpty()) return false;
         LocationEntity locationEntity = opLocationEntity.get();
         locationEntity.updateFromDto(locationDto);

@@ -2,6 +2,7 @@ package com.mechanicaleng.item;
 
 import com.mechanicaleng.user.UserEntity;
 import com.mechanicaleng.user.UserRepository;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,46 +22,40 @@ public class LogService {
     @Autowired
     public UserRepository userRepository;
 
-    //add log
-    public void addLog(LogDto logDto) {
-        LogEntity logEntity = LogEntity.fromDto(logDto);
-        logRepository.save(logEntity);
+    //create log
+
+    public Boolean addLog(Long userId, Long itemId) {
+        Optional<UserEntity> user = userRepository.findById(userId);
+        Optional<ItemEntity> item = itemRepository.findById(itemId);
+        if (user.isPresent() && item.isPresent()) {
+            LogEntity logEntity = new LogEntity();
+            logEntity.setUser(user.get());
+            logEntity.setItem(item.get());
+            logRepository.save(logEntity);
+            return true;
+        }
+        return false;
     }
 
 
     //find all current borrow list with user id
-    public List<ItemEntity> findBorrowList(Long userId) {
+    public List<LogDto> findBorrowList(Long userId) {
         Optional<UserEntity> userEntityOptional = userRepository.findById(userId);
         if (userEntityOptional.isEmpty()) {
             return Collections.emptyList();
         } else {
             UserEntity user = userEntityOptional.get();
-            List<LogEntity> entities = logRepository.findLogEntitiesByUserEqualsAndIsCurrentEquals(user, Boolean.TRUE);
-            List<ItemEntity> itemEntitiesList = new ArrayList<>();
-            entities.forEach(logEntity -> {
-                itemEntitiesList.add(logEntity.getItem());
-            });
-            return itemEntitiesList;
+            List<LogEntity> entities = logRepository.findLogEntitiesByUserEquals(user);
+            return getLogDtos(entities);
         }
     }
 
-    //update log, mainly for changing isCurrent
-    public Boolean updateLog(LogDto logDto) {
-        Optional<LogEntity> opLogEntity = logRepository.findById(logDto.getId());
-        if (opLogEntity.isEmpty()) return false;
-        LogEntity logEntity = opLogEntity.get();
-        logEntity.updateFromDto(logDto);
-        logRepository.save(logEntity);
-        return true;
-    }
 
-
-
-    private List<LogEntity> getLogDtos(List<LogEntity> entities) {
+    private List<LogDto> getLogDtos(List<LogEntity> entities) {
         List<LogDto> logDtoList = new ArrayList<>();
         entities.forEach(logEntity -> {
             logDtoList.add(logEntity.toDto());
         });
-        return getLogDtos(entities);
+        return logDtoList;
     }
 }
