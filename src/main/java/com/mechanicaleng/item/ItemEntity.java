@@ -34,7 +34,7 @@ public class ItemEntity {
 	private String category;
 
 	@Enumerated(value = EnumType.STRING)
-	private ReturnTypeEnum returnTypeEnum;
+	private BorrowTermEnum borrowTermEnum;
 
 
 //
@@ -50,7 +50,7 @@ public class ItemEntity {
 
 
 	public static ItemEntity fromDto(ItemDto itemDto) {
-		return ItemEntity.builder().name(itemDto.getName()).serial(itemDto.getSerial()).statusEnum(itemDto.getStatusEnum()).setName(itemDto.getSetName()).category(itemDto.getCategory()).build();
+		return ItemEntity.builder().name(itemDto.getName()).serial(itemDto.getSerial()).setName(itemDto.getSetName()).category(itemDto.getCategory()).build();
 	}
 
 	public ItemDto toDto() {
@@ -59,7 +59,6 @@ public class ItemEntity {
 
 	public void updateFromDto(ItemDto itemDto) {
 		this.setSetName(itemDto.getSetName());
-		this.setStatusEnum(itemDto.getStatusEnum());
 		this.setName(itemDto.getName());
 		this.setSerial(itemDto.getSerial());
 		this.setCategory(itemDto.getCategory());

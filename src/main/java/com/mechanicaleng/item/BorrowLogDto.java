@@ -1,8 +1,6 @@
 package com.mechanicaleng.item;
 
 import com.mechanicaleng.user.UserDisplayDto;
-import com.mechanicaleng.user.UserDto;
-import com.mechanicaleng.user.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +12,7 @@ import java.time.LocalDateTime;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class LogDto {
+public class BorrowLogDto {
     private long id;
 
     private UserDisplayDto user;

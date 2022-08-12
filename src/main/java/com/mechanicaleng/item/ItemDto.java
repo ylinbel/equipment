@@ -26,6 +26,6 @@ public class ItemDto{
 
     private String category;
 
-    private ReturnTypeEnum returnTypeEnum;
+    private BorrowTermEnum borrowTermEnum;
 
 }

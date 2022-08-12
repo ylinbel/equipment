@@ -4,6 +4,7 @@ import com.mechanicaleng.location.LocationEntity;
 import com.mechanicaleng.location.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,6 +19,9 @@ public class ItemService {
 	@Autowired
 	public LocationRepository locationRepository;
 
+	@Autowired
+	public BorrowLogService borrowLogService;
+
 	//add item
 
 	public void addItem(ItemDto itemDto) {
@@ -30,6 +34,16 @@ public class ItemService {
 
 	public void deleteItemWithId(Long id) {
 		itemRepository.deleteById(id);
+	}
+
+	public Boolean updateItem(ItemDto itemDto) {
+		Optional<ItemEntity> optItemEntity = itemRepository.findById(itemDto.getId());
+		if (optItemEntity.isEmpty()) return false;
+		ItemEntity itemEntity = optItemEntity.get();
+		itemEntity.updateFromDto(itemDto);
+		itemEntity.setLocation(locationRepository.findById(itemDto.getLocation().getId()).get());
+		itemRepository.save(itemEntity);
+		return true;
 	}
 
 	//search item
@@ -60,8 +74,8 @@ public class ItemService {
 		List<ItemEntity> entities = itemRepository.findItemEntitiesBySetNameLike(set);
 		return getItemDtos(entities);
 	}
-
 	//find all items in the same location
+
 	public List<ItemDto> findByLocation(long locationId) {
 		Optional<LocationEntity> locationEntityOptional = locationRepository.findById(locationId);
 		if (locationEntityOptional.isEmpty()) {
@@ -73,27 +87,36 @@ public class ItemService {
 		}
 	}
 
-
 	//find all damaged items
+
 	public List<ItemDto> findItemsByStatus(StatusEnum status) {
 		List<ItemEntity> entities = itemRepository.findAllByStatusEnumEquals(status);
 		return getItemDtos(entities);
 	}
 
 
-	public Boolean updateItem(ItemDto itemDto) {
-		Optional<ItemEntity> optItemEntity = itemRepository.findById(itemDto.getId());
-		if (optItemEntity.isEmpty()) return false;
-		ItemEntity itemEntity = optItemEntity.get();
-		itemEntity.updateFromDto(itemDto);
-		itemEntity.setLocation(locationRepository.findById(itemDto.getLocation().getId()).get());
-        itemRepository.save(itemEntity);
-		return true;
-    }
-
 	public List<ItemDto> findItemsWithSerialStartWith(String serial) {
 		List<ItemEntity> entities = itemRepository.findItemEntitiesBySerialStartingWith(serial);
 		return getItemDtos(entities);
 	}
 
+	@Transactional
+	public Boolean borrowItem(Long id) {
+		Optional<ItemEntity> optItemEntity = itemRepository.findItemEntityByIdAndStatusEnum(id, StatusEnum.AVAILABLE);
+		if (optItemEntity.isEmpty()) return false;
+		ItemEntity itemEntity = optItemEntity.get();
+		itemEntity.setStatusEnum(StatusEnum.NOT_AVAILABLE);
+		itemRepository.save(itemEntity);
+		return borrowLogService.handleBorrowLog(123L, itemEntity);
+	}
+
+	@Transactional
+	public Boolean returnItem(Long id, Boolean isBroken) {
+		Optional<ItemEntity> optItemEntity = itemRepository.findItemEntityByIdAndStatusEnum(id, StatusEnum.NOT_AVAILABLE);
+		if (optItemEntity.isEmpty()) return false;
+		ItemEntity itemEntity = optItemEntity.get();
+		itemEntity.setStatusEnum(isBroken ? StatusEnum.DAMAGED : StatusEnum.AVAILABLE);
+		itemRepository.save(itemEntity);
+		return borrowLogService.handleReturnLog(itemEntity);
+	}
 }

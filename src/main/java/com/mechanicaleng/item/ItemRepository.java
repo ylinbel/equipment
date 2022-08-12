@@ -16,6 +16,8 @@ public interface ItemRepository extends JpaRepository<ItemEntity, Long> {
 
     public Optional<ItemEntity> findItemEntityByIdEquals(Long id);
 
+    public Optional<ItemEntity> findItemEntityByIdAndStatusEnum(Long id, StatusEnum statusEnum);
+
     public List<ItemEntity> findAllByStatusEnumEquals(StatusEnum statusEnum);
 
     public List<ItemEntity> findItemEntitiesBySetNameLike(String setNum);
@@ -24,6 +26,6 @@ public interface ItemRepository extends JpaRepository<ItemEntity, Long> {
 
     public List<ItemEntity> findItemEntitiesBySerialStartingWith(String letters);
 
-    public List<ItemEntity> findAllByStatusEnumEqualsAndReturnTypeEnumEquals(StatusEnum statusEnum, ReturnTypeEnum returnTypeEnum);
+    public List<ItemEntity> findAllByStatusEnumEqualsAndBorrowTermEnumEquals(StatusEnum statusEnum, BorrowTermEnum borrowTermEnum);
 
 }

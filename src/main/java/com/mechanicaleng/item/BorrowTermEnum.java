@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
-public enum ReturnTypeEnum {
+public enum BorrowTermEnum {
     DAILY("Daily"),
     MONTHLY("Monthly"),
     THREEMONTH("ThreeMonth");
