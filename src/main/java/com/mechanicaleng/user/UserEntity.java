@@ -6,7 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
+
 
 @Data
 @Builder(toBuilder = true)
@@ -25,8 +26,7 @@ public class UserEntity {
     @Enumerated(value = EnumType.STRING)
     private UserTypeEnum userTypeEnum;
 
-    @Temporal(TemporalType.DATE)
-    private Date utilDate;
+    private LocalDate utilDate;
 
     private String email;
 
@@ -36,7 +36,7 @@ public class UserEntity {
     }
 
     public UserDisplayDto toDto() {
-        return UserDisplayDto.builder().name(this.getName()).userTypeEnum(this.getUserTypeEnum()).utilDate(this.getUtilDate()).email(this.getEmail()).build();
+        return UserDisplayDto.builder().name(this.getName()).userTypeEnum(this.getUserTypeEnum()).email(this.getEmail()).utilDate(this.getUtilDate()).build();
     }
 
     public void updateFromDto(UserDto userDto) {

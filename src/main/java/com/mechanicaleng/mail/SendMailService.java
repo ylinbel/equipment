@@ -1,7 +1,10 @@
 package com.mechanicaleng.mail;
 
 import com.mechanicaleng.item.BorrowLogEntity;
+import com.mechanicaleng.item.BorrowLogRepository;
+import com.mechanicaleng.item.BorrowLogService;
 import com.mechanicaleng.item.ItemEntity;
+import com.mechanicaleng.user.UserEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +14,15 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Service
 public class SendMailService {
     @Autowired
     private JavaMailSender javaMailSender;
+
+    @Autowired
+    private BorrowLogRepository borrowLogRepository;
 
     @Value("${spring.mail.username}")
     private String sender;
@@ -37,7 +44,7 @@ public class SendMailService {
                         "\n" +
                         "Dynamics Lab Email Assistant\n" +
                         "\n" +
-                        "_________________________________________________________________________________\n" +
+                        "*******************\n" +
                         "\n" +
                         "Please do not reply this email address directly. \n"
         );
@@ -60,7 +67,7 @@ public class SendMailService {
                 "Thank you,\n" +
                 "Dynamics Lab Email Assistant\n" +
                 "\n" +
-                "_________________________________________________________________________________\n" +
+                "*******************\n" +
                 "\n" +
                 "Please do not reply this email address directly. \n"
         );
@@ -68,4 +75,61 @@ public class SendMailService {
         logger.info("Successfully send the email");
     }
 
+    public void sendLeavingEmailToUser(UserEntity user) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(sender);
+        message.setTo(user.getEmail());
+        message.setSubject("Reminder: Change To Your account");
+        message.setText("Dear user, \n" +
+                "\n" +
+                "This is a reminder that your account will be deleted within 30 days. Please return all the items before you leave." +
+                "If you want to change the date you leave the lab, please edit 'end date' in your personal information.\n" +
+                "\n" +
+                "\n" +
+                "Thank you,\n" +
+                "Dynamics Lab Manager" +
+                "*******************\n" +
+                "\n" +
+                "Please do not reply this email address directly. \n"
+        );
+        javaMailSender.send(message);
+        logger.info("Successfully send the email");
+    }
+
+    public void sendLeavingEmailToManager(UserEntity user) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(sender);
+        message.setTo(user.getEmail());
+        message.setSubject("User " + user.getName() + "Is About To Leave the Lab");
+        message.setText("Dear manager, \n" +
+                "\n" +
+                "A user is going to leave the lab within 30 days \n" +
+                "\n" +
+                "User name " +  user.getName() + "\n" +
+                "Contact email: " +  user.getEmail() + "\n" +
+                "Leaving Date: " +  user.getUtilDate().format(DateTimeFormatter.RFC_1123_DATE_TIME) + "\n" +
+                "User Type: " +  user.getUserTypeEnum().toString() + "\n" +
+                "Items to return:" + getItemsToReturn(user) +
+                "\n" +
+                "Dynamics Lab Email Assistant\n" +
+                "\n" +
+                "*******************\n" +
+                "\n" +
+                "Please do not reply this email address directly. \n"
+        );
+        javaMailSender.send(message);
+        logger.info("Successfully send the email");
+    }
+
+    public String getItemsToReturn(UserEntity user) {
+        StringBuilder stringBuilder = new StringBuilder();
+        List<BorrowLogEntity> logs = borrowLogRepository.findLogEntitiesByUserEquals(user);
+        logs.forEach(log -> {
+            if (!log.getIsReturn()) {
+                stringBuilder.append("Item name: " + log.getItem().getName() + "  ");
+                stringBuilder.append("Overdue time: " + log.getOverDueTime().format(DateTimeFormatter.RFC_1123_DATE_TIME) + "\n");
+            }
+        });
+        return stringBuilder.toString();
+    }
 }

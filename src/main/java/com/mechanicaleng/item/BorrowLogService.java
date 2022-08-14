@@ -73,6 +73,8 @@ public class BorrowLogService {
     private LocalDateTime getOverDueTime(BorrowTermEnum borrowTermEnum) {
         if (BorrowTermEnum.DAILY == borrowTermEnum) {
             return LocalDateTime.now().plusDays(1);
+        } else if (BorrowTermEnum.WEEKLY == borrowTermEnum) {
+            return LocalDateTime.now().plusDays(7);
         } else if (BorrowTermEnum.MONTHLY == borrowTermEnum) {
             return LocalDateTime.now().plusMonths(1);
         } else {

@@ -1,8 +1,11 @@
 package com.mechanicaleng.user;
 
+import com.mechanicaleng.mail.SendMailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +15,9 @@ public class UserService {
 
     @Autowired
     public UserRepository userRepository;
+
+    @Autowired
+    public SendMailService sendMailService;
 
     //create user
     public void addUser(UserDto userDto) {
@@ -52,5 +58,25 @@ public class UserService {
         });
         return userDtoList;
     }
+
+    /*warning email 30 days before the end date to the user and manager
+    delete the account after util date
+     */
+    @Scheduled(initialDelay = 60_000, fixedDelayString = "${task.checkDiskSpace:PT24H0M0S}")
+    public void checkEndDate() {
+        LocalDate date = LocalDate.now();
+        List<UserEntity> users = userRepository.findAll();
+        users.forEach(userEntity -> {
+                    if (date.isAfter(userEntity.getUtilDate().minusDays(30))) {
+                        sendMailService.sendLeavingEmailToUser(userEntity);
+                        sendMailService.sendLeavingEmailToManager(userEntity);
+                    }
+                    if (date.isAfter(userEntity.getUtilDate())) {
+                        deleteWithId(userEntity.getId());
+                    }
+                });
+    }
+
+
 
 }

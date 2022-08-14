@@ -7,6 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum BorrowTermEnum {
     DAILY("Daily"),
+    WEEKLY("Weekly"),
     MONTHLY("Monthly"),
     THREEMONTH("ThreeMonth");
 

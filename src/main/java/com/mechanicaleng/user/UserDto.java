@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Builder(toBuilder = true)
@@ -21,7 +21,7 @@ public class UserDto {
 
     private UserTypeEnum userTypeEnum;
 
-    private Date utilDate;
+    private LocalDate utilDate;
 
     private String email;
 }
