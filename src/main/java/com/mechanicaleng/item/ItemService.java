@@ -2,9 +2,10 @@ package com.mechanicaleng.item;
 
 import com.mechanicaleng.location.LocationEntity;
 import com.mechanicaleng.location.LocationRepository;
-import com.mechanicaleng.mail.SendMailServiceImpl;
+import com.mechanicaleng.mail.SendMailService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +26,7 @@ public class ItemService {
 	public BorrowLogService borrowLogService;
 
 	@Autowired
-	public SendMailServiceImpl sendMailService;
+	public SendMailService sendMailService;
 
 	//add item
 

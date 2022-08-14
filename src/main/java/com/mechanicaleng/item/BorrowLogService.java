@@ -1,6 +1,6 @@
 package com.mechanicaleng.item;
 
-import com.mechanicaleng.mail.SendMailServiceImpl;
+import com.mechanicaleng.mail.SendMailService;
 import com.mechanicaleng.user.UserEntity;
 import com.mechanicaleng.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class BorrowLogService {
     public UserRepository userRepository;
 
     @Autowired
-    public SendMailServiceImpl sendMailService;
+    public SendMailService sendMailService;
     //create log
 
 //    public Boolean handleBorrowLog(Long userId, Long itemId, BorrowTermEnum borrowTermEnum) {
