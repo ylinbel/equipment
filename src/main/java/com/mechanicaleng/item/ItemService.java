@@ -2,6 +2,8 @@ package com.mechanicaleng.item;
 
 import com.mechanicaleng.location.LocationEntity;
 import com.mechanicaleng.location.LocationRepository;
+import com.mechanicaleng.mail.SendMailServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,9 @@ public class ItemService {
 
 	@Autowired
 	public BorrowLogService borrowLogService;
+
+	@Autowired
+	public SendMailServiceImpl sendMailService;
 
 	//add item
 
@@ -117,6 +122,7 @@ public class ItemService {
 		ItemEntity itemEntity = optItemEntity.get();
 		itemEntity.setStatusEnum(isBroken ? StatusEnum.DAMAGED : StatusEnum.AVAILABLE);
 		itemRepository.save(itemEntity);
+		if(isBroken) sendMailService.sendBrokenEmail(itemEntity);
 		return borrowLogService.handleReturnLog(itemEntity);
 	}
 }

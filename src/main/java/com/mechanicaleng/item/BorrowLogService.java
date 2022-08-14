@@ -1,5 +1,6 @@
 package com.mechanicaleng.item;
 
+import com.mechanicaleng.mail.SendMailServiceImpl;
 import com.mechanicaleng.user.UserEntity;
 import com.mechanicaleng.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class BorrowLogService {
     @Autowired
     public UserRepository userRepository;
 
+    @Autowired
+    public SendMailServiceImpl sendMailService;
     //create log
 
 //    public Boolean handleBorrowLog(Long userId, Long itemId, BorrowTermEnum borrowTermEnum) {
@@ -106,20 +109,11 @@ public class BorrowLogService {
                     if (currentTime.isAfter(borrowLog.getOverDueTime())) {
                         borrowLog.setOverDue(true);
                         borrowLogRepository.save(borrowLog);
+                        //send a reminding email
+                        sendMailService.sendOverdueEmail(borrowLog);
                     }
                 }
         );
-//        List<ItemEntity> unAvailableItems = itemRepository.findAllByStatusEnumEqualsAndReturnTypeEnumEquals(StatusEnum.NOT_AVAILABLE, BorrowTermEnum.DAILY);
-//        List<BorrowLogEntity> currentEntities = new ArrayList<>();
-//        unAvailableItems.forEach(item -> {
-//            List<BorrowLogEntity> itemLog = borrowLogRepository.findLogEntitiesByItemEquals(item);
-//            currentEntities.addAll(itemLog);
-//        });
-//        currentEntities.forEach(log -> {
-//            if (Duration.between(log.getBorrowTime(), currentTime).compareTo(Duration.ofHours(24)) > 0)
-//            log.setOverDue(Boolean.TRUE);
-//            borrowLogRepository.save(log);
-//        });
     }
 
 

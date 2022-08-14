@@ -36,25 +36,15 @@ public class ItemEntity {
 	@Enumerated(value = EnumType.STRING)
 	private BorrowTermEnum borrowTermEnum;
 
-
-//
-/*
-	borrow date
-
-	return date
-
-	time period
- */
-
-
+	private String detailInformation;
 
 
 	public static ItemEntity fromDto(ItemDto itemDto) {
-		return ItemEntity.builder().name(itemDto.getName()).serial(itemDto.getSerial()).setName(itemDto.getSetName()).category(itemDto.getCategory()).build();
+		return ItemEntity.builder().name(itemDto.getName()).serial(itemDto.getSerial()).setName(itemDto.getSetName()).category(itemDto.getCategory()).detailInformation(itemDto.getDetailInformation()).build();
 	}
 
 	public ItemDto toDto() {
-		return ItemDto.builder().name(this.getName()).serial(this.getSerial()).statusEnum(this.getStatusEnum()).setName(this.getSetName()).location(this.getLocation().toDto()).category(this.getCategory()).build();
+		return ItemDto.builder().name(this.getName()).serial(this.getSerial()).statusEnum(this.getStatusEnum()).setName(this.getSetName()).location(this.getLocation().toDto()).category(this.getCategory()).detailInformation(this.getDetailInformation()).build();
 	}
 
 	public void updateFromDto(ItemDto itemDto) {
@@ -62,5 +52,6 @@ public class ItemEntity {
 		this.setName(itemDto.getName());
 		this.setSerial(itemDto.getSerial());
 		this.setCategory(itemDto.getCategory());
+		this.setDetailInformation(itemDto.getDetailInformation());
 	}
 }

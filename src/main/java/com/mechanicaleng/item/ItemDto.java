@@ -28,4 +28,6 @@ public class ItemDto{
 
     private BorrowTermEnum borrowTermEnum;
 
+    private String detailInformation;
+
 }

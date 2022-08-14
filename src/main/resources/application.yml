@@ -1,7 +1,21 @@
 server:
   port: 8080
 
+
+
 spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: yijunlin0621@gmail.com
+    password: gmaj ksxo mgdj glgh
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   jpa:
     #    database-platform: com.oocl.demo.commonlib.jpa.MySQL8DialectCustomUtf8mb40900AsCs
     properties:
