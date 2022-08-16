@@ -37,7 +37,7 @@ public class LocationController {
     //delete location
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteItemEntity(@PathVariable Long id) {
+    public ResponseEntity<String> deleteLocationEntity(@PathVariable Long id) {
         locationService.deleteWithId(id);
         return ResponseEntity.ok("Deleted");
     }
@@ -67,5 +67,4 @@ public class LocationController {
         List<LocationDto> locationByName = locationService.findLocationWithName(name);
         return ResponseEntity.ok(locationByName);
     }
-
 }

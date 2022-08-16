@@ -2,7 +2,6 @@ package com.mechanicaleng.mail;
 
 import com.mechanicaleng.item.BorrowLogEntity;
 import com.mechanicaleng.item.BorrowLogRepository;
-import com.mechanicaleng.item.BorrowLogService;
 import com.mechanicaleng.item.ItemEntity;
 import com.mechanicaleng.user.UserEntity;
 import org.slf4j.Logger;
@@ -15,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SendMailService {
@@ -80,7 +80,7 @@ public class SendMailService {
         message.setFrom(sender);
         message.setTo(user.getEmail());
         message.setSubject("Reminder: Change To Your account");
-        message.setText("Dear user, \n" +
+        message.setText("Dear user, \n" + user.getName() +
                 "\n" +
                 "This is a reminder that your account will be deleted within 30 days. Please return all the items before you leave." +
                 "If you want to change the date you leave the lab, please edit 'end date' in your personal information.\n" +
@@ -99,7 +99,7 @@ public class SendMailService {
     public void sendLeavingEmailToManager(UserEntity user) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(sender);
-        message.setTo(user.getEmail());
+        message.setTo("yl6220@ic.ac.uk");
         message.setSubject("User " + user.getName() + "Is About To Leave the Lab");
         message.setText("Dear manager, \n" +
                 "\n" +
@@ -107,7 +107,7 @@ public class SendMailService {
                 "\n" +
                 "User name " +  user.getName() + "\n" +
                 "Contact email: " +  user.getEmail() + "\n" +
-                "Leaving Date: " +  user.getUtilDate().format(DateTimeFormatter.RFC_1123_DATE_TIME) + "\n" +
+                "Leaving Date: " +  user.getUtilDate().toString() + "\n" +
                 "User Type: " +  user.getUserTypeEnum().toString() + "\n" +
                 "Items to return:" + getItemsToReturn(user) +
                 "\n" +
@@ -124,11 +124,10 @@ public class SendMailService {
     public String getItemsToReturn(UserEntity user) {
         StringBuilder stringBuilder = new StringBuilder();
         List<BorrowLogEntity> logs = borrowLogRepository.findLogEntitiesByUserEquals(user);
-        logs.forEach(log -> {
-            if (!log.getIsReturn()) {
+        List<BorrowLogEntity> currentLogs = logs.stream().filter(item -> !item.getIsReturn()).collect(Collectors.toList());
+        currentLogs.forEach(log -> {
                 stringBuilder.append("Item name: " + log.getItem().getName() + "  ");
-                stringBuilder.append("Overdue time: " + log.getOverDueTime().format(DateTimeFormatter.RFC_1123_DATE_TIME) + "\n");
-            }
+                stringBuilder.append("Overdue time: " + log.getOverDueTime().toString() + "\n");
         });
         return stringBuilder.toString();
     }

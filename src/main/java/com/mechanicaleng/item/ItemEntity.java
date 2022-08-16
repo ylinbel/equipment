@@ -31,8 +31,6 @@ public class ItemEntity {
 	@ManyToOne(fetch=FetchType.EAGER)
 	private LocationEntity location;
 
-	private String category;
-
 	@Enumerated(value = EnumType.STRING)
 	private BorrowTermEnum borrowTermEnum;
 
@@ -40,18 +38,18 @@ public class ItemEntity {
 
 
 	public static ItemEntity fromDto(ItemDto itemDto) {
-		return ItemEntity.builder().name(itemDto.getName()).serial(itemDto.getSerial()).setName(itemDto.getSetName()).category(itemDto.getCategory()).detailInformation(itemDto.getDetailInformation()).build();
+		return ItemEntity.builder().name(itemDto.getName()).serial(itemDto.getSerial()).borrowTermEnum(itemDto.getBorrowTermEnum()).setName(itemDto.getSetName()).detailInformation(itemDto.getDetailInformation()).build();
 	}
 
 	public ItemDto toDto() {
-		return ItemDto.builder().name(this.getName()).serial(this.getSerial()).statusEnum(this.getStatusEnum()).setName(this.getSetName()).location(this.getLocation().toDto()).category(this.getCategory()).detailInformation(this.getDetailInformation()).build();
+		return ItemDto.builder().name(this.getName()).serial(this.getSerial()).borrowTermEnum(this.getBorrowTermEnum()).statusEnum(this.getStatusEnum()).setName(this.getSetName()).location(this.getLocation().toDto()).detailInformation(this.getDetailInformation()).build();
 	}
 
 	public void updateFromDto(ItemDto itemDto) {
 		this.setSetName(itemDto.getSetName());
 		this.setName(itemDto.getName());
 		this.setSerial(itemDto.getSerial());
-		this.setCategory(itemDto.getCategory());
 		this.setDetailInformation(itemDto.getDetailInformation());
+		this.setBorrowTermEnum(itemDto.getBorrowTermEnum());
 	}
 }

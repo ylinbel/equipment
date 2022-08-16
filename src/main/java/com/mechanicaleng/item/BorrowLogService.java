@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BorrowLogService {
@@ -91,7 +92,8 @@ public class BorrowLogService {
         } else {
             UserEntity user = userEntityOptional.get();
             List<BorrowLogEntity> entities = borrowLogRepository.findLogEntitiesByUserEquals(user);
-            return getLogDtos(entities);
+            List<BorrowLogEntity> currentLogs = entities.stream().filter(item -> !item.getIsReturn()).collect(Collectors.toList());
+            return getLogDtos(currentLogs);
         }
     }
 

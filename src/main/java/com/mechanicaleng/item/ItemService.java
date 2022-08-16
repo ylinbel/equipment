@@ -126,4 +126,14 @@ public class ItemService {
 		if(isBroken) sendMailService.sendBrokenEmail(itemEntity);
 		return borrowLogService.handleReturnLog(itemEntity);
 	}
+
+	public Boolean restoreItem(Long id) {
+		Optional<ItemEntity> opItemEntity = itemRepository.findById(id);
+		if(opItemEntity.isEmpty()) return false;
+		opItemEntity.get().setStatusEnum(StatusEnum.AVAILABLE);
+		itemRepository.save(opItemEntity.get());
+		return true;
+	}
+
+
 }

@@ -56,6 +56,16 @@ public class ItemController {
 		}
 	}
 
+	@PutMapping("/{id}/restore")
+	public ResponseEntity<String> retoreItem(@PathVariable Long id) {
+		Boolean result = itemService.restoreItem(id);
+		if (result) {
+			return ResponseEntity.ok("Success");
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Bad Request");
+		}
+	}
+
 //	@PostMapping("/log/{user_id}/{item_id}")
 //	public ResponseEntity<String> addLog(@PathVariable(value = "user_id") Long userId,@PathVariable(value = "item_id") Long itemId) {
 //		Boolean result = borrowLogService.handleBorrowLog(userId, itemId, itemEntity.getBorrowTermEnum());
