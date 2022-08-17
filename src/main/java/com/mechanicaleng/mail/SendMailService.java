@@ -62,7 +62,7 @@ public class SendMailService {
                 "\n" +
                 "This is a reminder that you need to return the following items to the lab as soon as possible: \n" +
                 "\n" +
-                "Item name: " + log.getItem().getName() + ", overdue time: " + log.getReturnTime().format(DateTimeFormatter.RFC_1123_DATE_TIME) + "\n" +
+                "Item name: " + log.getItem().getName() + ", overdue time: " + log.getOverDueTime().toString() + "\n" +
                 "\n" +
                 "Thank you,\n" +
                 "Dynamics Lab Email Assistant\n" +
@@ -99,7 +99,7 @@ public class SendMailService {
     public void sendLeavingEmailToManager(UserEntity user) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(sender);
-        message.setTo("yl6220@ic.ac.uk");
+        message.setTo("2024381928qq.com");
         message.setSubject("User " + user.getName() + "Is About To Leave the Lab");
         message.setText("Dear manager, \n" +
                 "\n" +
