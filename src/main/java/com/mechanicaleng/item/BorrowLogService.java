@@ -76,6 +76,8 @@ public class BorrowLogService {
             return LocalDateTime.now().plusDays(1);
         } else if (BorrowTermEnum.WEEKLY == borrowTermEnum) {
             return LocalDateTime.now().plusDays(7);
+        } else if (BorrowTermEnum.TWOWEEK == borrowTermEnum) {
+            return LocalDateTime.now().plusDays(14);
         } else if (BorrowTermEnum.MONTHLY == borrowTermEnum) {
             return LocalDateTime.now().plusMonths(1);
         } else {

@@ -36,7 +36,7 @@ public class UserEntity {
     }
 
     public UserDisplayDto toDto() {
-        return UserDisplayDto.builder().name(this.getName()).userTypeEnum(this.getUserTypeEnum()).email(this.getEmail()).utilDate(this.getUtilDate()).build();
+        return UserDisplayDto.builder().id(this.getId()).name(this.getName()).userTypeEnum(this.getUserTypeEnum()).email(this.getEmail()).utilDate(this.getUtilDate()).build();
     }
 
     public void updateFromDto(UserDto userDto) {

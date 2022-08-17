@@ -33,6 +33,7 @@ public class ItemService {
 	public void addItem(ItemDto itemDto) {
 		ItemEntity itemEntity = ItemEntity.fromDto(itemDto);
 		itemEntity.setLocation(locationRepository.findById(itemDto.getLocation().getId()).get());
+		itemEntity.setStatusEnum(StatusEnum.AVAILABLE);
 		itemRepository.save(itemEntity);
 	}
 
@@ -113,7 +114,7 @@ public class ItemService {
 		ItemEntity itemEntity = optItemEntity.get();
 		itemEntity.setStatusEnum(StatusEnum.NOT_AVAILABLE);
 		itemRepository.save(itemEntity);
-		return borrowLogService.handleBorrowLog(123L, itemEntity);
+		return borrowLogService.handleBorrowLog(2L, itemEntity);
 	}
 
 	@Transactional

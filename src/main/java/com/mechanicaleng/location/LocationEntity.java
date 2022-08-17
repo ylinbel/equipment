@@ -38,7 +38,7 @@ public class LocationEntity {
     }
 
     public LocationDto toDto() {
-		return LocationDto.builder().name(this.getName()).serial(this.getSerial()).layer(this.getLayer()).cabinet(this.getCabinet()).build();
+		return LocationDto.builder().id(this.getId()).name(this.getName()).serial(this.getSerial()).layer(this.getLayer()).cabinet(this.getCabinet()).build();
     }
 
     public void updateFromDto(LocationDto locationDto) {

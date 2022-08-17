@@ -40,7 +40,7 @@ public class BorrowLogEntity {
 
 
     public BorrowLogDto toDto() {
-        return BorrowLogDto.builder().user(this.getUser().toDto()).item(this.getItem().toDto()).startTime(this.getBorrowTime()).overDue(this.getOverDue()).build();
+        return BorrowLogDto.builder().id(this.getId()).user(this.getUser().toDto()).item(this.getItem().toDto()).startTime(this.getBorrowTime()).overDue(this.getOverDue()).build();
     }
 
 }

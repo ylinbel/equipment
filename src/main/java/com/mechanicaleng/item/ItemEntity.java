@@ -42,7 +42,7 @@ public class ItemEntity {
 	}
 
 	public ItemDto toDto() {
-		return ItemDto.builder().name(this.getName()).serial(this.getSerial()).borrowTermEnum(this.getBorrowTermEnum()).statusEnum(this.getStatusEnum()).setName(this.getSetName()).location(this.getLocation().toDto()).detailInformation(this.getDetailInformation()).build();
+		return ItemDto.builder().id(this.getId()).name(this.getName()).serial(this.getSerial()).borrowTermEnum(this.getBorrowTermEnum()).statusEnum(this.getStatusEnum()).setName(this.getSetName()).location(this.getLocation().toDto()).detailInformation(this.getDetailInformation()).build();
 	}
 
 	public void updateFromDto(ItemDto itemDto) {

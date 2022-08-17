@@ -8,6 +8,7 @@ import lombok.Getter;
 public enum BorrowTermEnum {
     DAILY("Daily"),
     WEEKLY("Weekly"),
+    TWOWEEK("TwoWeek"),
     MONTHLY("Monthly"),
     THREEMONTH("ThreeMonth");
 
