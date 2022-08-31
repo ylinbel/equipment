@@ -66,16 +66,6 @@ public class ItemController {
 		}
 	}
 
-//	@PostMapping("/log/{user_id}/{item_id}")
-//	public ResponseEntity<String> addLog(@PathVariable(value = "user_id") Long userId,@PathVariable(value = "item_id") Long itemId) {
-//		Boolean result = borrowLogService.handleBorrowLog(userId, itemId, itemEntity.getBorrowTermEnum());
-//		if(result) {
-//			return ResponseEntity.ok("Success");
-//		} else {
-//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Bad Request");
-//		}
-//	}
-
 	//update item information
 
 	// delete item
@@ -128,6 +118,13 @@ public class ItemController {
 	public ResponseEntity<List<ItemDto>> findByLocation(@PathVariable(value = "location-id") long location) {
 		List<ItemDto> itemsByLocation = itemService.findByLocation(location);
 		return itemsByLocation != null ? ResponseEntity.ok(itemsByLocation) : ResponseEntity.notFound().build();
+	}
+
+	//find all items under the same location
+	@GetMapping("/find-by-category/{category-id}")
+	public ResponseEntity<List<ItemDto>> findByCategory(@PathVariable(value = "category-id") long category) {
+		List<ItemDto> itemsByCategory = itemService.findByCategory(category);
+		return itemsByCategory != null ? ResponseEntity.ok(itemsByCategory) : ResponseEntity.notFound().build();
 	}
 
 	@GetMapping("log/get-borrow-list/{user_id}")

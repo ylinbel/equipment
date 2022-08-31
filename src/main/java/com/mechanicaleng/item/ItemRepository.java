@@ -1,5 +1,6 @@
 package com.mechanicaleng.item;
 
+import com.mechanicaleng.category.CategoryEntity;
 import com.mechanicaleng.location.LocationEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -24,8 +25,8 @@ public interface ItemRepository extends JpaRepository<ItemEntity, Long> {
 
     public List<ItemEntity> findItemEntitiesByLocationEquals(LocationEntity location);
 
-    public List<ItemEntity> findItemEntitiesBySerialStartingWith(String letters);
+    public List<ItemEntity> findItemEntitiesByCategoryEquals(CategoryEntity category);
 
-    public List<ItemEntity> findAllByStatusEnumEqualsAndBorrowTermEnumEquals(StatusEnum statusEnum, BorrowTermEnum borrowTermEnum);
+    public List<ItemEntity> findItemEntitiesBySerialStartingWith(String letters);
 
 }

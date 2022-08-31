@@ -1,5 +1,7 @@
 package com.mechanicaleng.item;
 
+import com.mechanicaleng.category.CategoryEntity;
+import com.mechanicaleng.category.CategoryRepository;
 import com.mechanicaleng.location.LocationEntity;
 import com.mechanicaleng.location.LocationRepository;
 import com.mechanicaleng.mail.SendMailService;
@@ -27,6 +29,9 @@ public class ItemService {
 
 	@Autowired
 	public SendMailService sendMailService;
+
+	@Autowired
+	public CategoryRepository categoryRepository;
 
 	//add item
 
@@ -90,6 +95,19 @@ public class ItemService {
 		} else {
 			LocationEntity location = locationEntityOptional.get();
 			List<ItemEntity> entities = itemRepository.findItemEntitiesByLocationEquals(location);
+			return getItemDtos(entities);
+		}
+	}
+
+	//find all items under the same category
+
+	public List<ItemDto> findByCategory(long categoryId) {
+		Optional<CategoryEntity> categoryEntityOptional = categoryRepository.findById(categoryId);
+		if (categoryEntityOptional.isEmpty()) {
+			return Collections.emptyList();
+		} else {
+			CategoryEntity category = categoryEntityOptional.get();
+			List<ItemEntity> entities = itemRepository.findItemEntitiesByCategoryEquals(category);
 			return getItemDtos(entities);
 		}
 	}
