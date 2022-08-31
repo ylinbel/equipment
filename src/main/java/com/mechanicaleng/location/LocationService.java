@@ -70,9 +70,9 @@ public class LocationService {
 
     // find by serial number
 
-    public List<LocationDto> findLocationWithSerial(String serial) {
-        List<LocationEntity> locations = locationRepository.findLocationEntitiesBySerialLike(serial);
-        return getLocationDtos(locations);
+    public LocationDto findLocationWithSerial(String serial) {
+        LocationEntity locations = locationRepository.findLocationEntityBySerialEquals(serial);
+        return locations.toDto();
     }
 
 

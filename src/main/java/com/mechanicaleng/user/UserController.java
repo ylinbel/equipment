@@ -44,10 +44,20 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @GetMapping("/find-by-email/{email}")
+    public ResponseEntity<UserDisplayDto> findUserWithEmail(@PathVariable String email) {
+        UserDisplayDto user = userService.findUserWithEmail(email);
+        return ResponseEntity.ok(user);
+    }
+
     @GetMapping("/find-by-user-type/{userType}")
     public ResponseEntity<List<UserDisplayDto>> findUserWithUserType(@PathVariable String userType) {
         List<UserDisplayDto> userList = userService.findUsersWithUserType(UserTypeEnum.valueOf(userType));
         return ResponseEntity.ok(userList);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<String> userLogin(@RequestParam("email") String email,@RequestParam("password") String password) {
+        return (userService.userLogin(email, password))? ResponseEntity.ok("Success") : ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Bad Request");
+    }
 }

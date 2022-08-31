@@ -1,5 +1,6 @@
 package com.mechanicaleng.item;
 
+import com.mechanicaleng.category.CategoryDto;
 import com.mechanicaleng.location.LocationDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,7 +25,7 @@ public class ItemDto{
 
 	private LocationDto location;
 
-    private String category;
+    private CategoryDto category;
 
     private BorrowTermEnum borrowTermEnum;
 

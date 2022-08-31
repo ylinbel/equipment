@@ -46,6 +46,12 @@ public class UserService {
         return getUserDtos(entities);
     }
 
+    //find user with email
+    public UserDisplayDto findUserWithEmail(String email) {
+        UserEntity entities = userRepository.findUserEntityByEmailEquals(email);
+        return entities.toDto();
+    }
+
     public List<UserDisplayDto> findUsersWithUserType(UserTypeEnum userTypeEnum) {
         List<UserEntity> entities = userRepository.findUserEntitiesByUserTypeEnumEquals(userTypeEnum);
         return getUserDtos(entities);
@@ -57,6 +63,11 @@ public class UserService {
             userDtoList.add(userEntity.toDto());
         });
         return userDtoList;
+    }
+
+    public Boolean userLogin(String email, String password) {
+        UserEntity userEntity = userRepository.findUserEntityByEmailEquals(email);
+        return userEntity.getPassword().equals(password);
     }
 
     /*warning email 30 days before the end date to the user and manager

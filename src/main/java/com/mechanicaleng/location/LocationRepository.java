@@ -14,6 +14,6 @@ public interface LocationRepository extends JpaRepository<LocationEntity, Long> 
 
     public List<LocationEntity> findLocationEntitiesByNameLike(String name);
 
-    public List<LocationEntity> findLocationEntitiesBySerialLike(String serial);
+    public LocationEntity findLocationEntityBySerialEquals(String serial);
 
 }

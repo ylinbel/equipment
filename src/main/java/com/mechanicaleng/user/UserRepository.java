@@ -15,4 +15,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     public List<UserEntity> findUserEntitiesByUserTypeEnumEquals(UserTypeEnum type);
 
     public List<UserEntity> findAll();
+
+    public UserEntity findUserEntityByEmailEquals(String email);
 }
