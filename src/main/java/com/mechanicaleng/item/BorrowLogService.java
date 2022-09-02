@@ -29,22 +29,6 @@ public class BorrowLogService {
     public SendMailService sendMailService;
     //create log
 
-//    public Boolean handleBorrowLog(Long userId, Long itemId, BorrowTermEnum borrowTermEnum) {
-//        Optional<UserEntity> user = userRepository.findById(userId);
-//        Optional<ItemEntity> item = itemRepository.findById(itemId);
-//        if (user.isPresent() && item.isPresent() && item.get().getStatusEnum().equals(StatusEnum.AVAILABLE)) {
-//            BorrowLogEntity borrowLogEntity = new BorrowLogEntity();
-//            borrowLogEntity.setUser(user.get());
-//            borrowLogEntity.setItem(item.get());
-//            borrowLogEntity.setOverDue(Boolean.FALSE);
-//            borrowLogEntity.setBorrowTime(LocalDateTime.now());
-//            borrowLogRepository.save(borrowLogEntity);
-//            item.get().setStatusEnum(StatusEnum.NOT_AVAILABLE);
-//            itemRepository.save(item.get());
-//            return true;
-//        }
-//        return false;
-//    }
 
     public Boolean handleBorrowLog(Long userId, ItemEntity itemEntity) {
         Optional<UserEntity> user = userRepository.findById(userId);

@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/location")
@@ -57,8 +56,8 @@ public class LocationController {
     }
 
     @GetMapping("find-by-serial/{serial}")
-    public ResponseEntity<List<LocationDto>> findBySerial(@PathVariable String serial) {
-        List<LocationDto> locationBySerial = locationService.findLocationWithSerial(serial);
+    public ResponseEntity<LocationDto> findBySerial(@PathVariable String serial) {
+        LocationDto locationBySerial = locationService.findLocationWithSerial(serial);
         return ResponseEntity.ok(locationBySerial);
     }
 

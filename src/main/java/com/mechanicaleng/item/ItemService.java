@@ -38,6 +38,7 @@ public class ItemService {
 	public void addItem(ItemDto itemDto) {
 		ItemEntity itemEntity = ItemEntity.fromDto(itemDto);
 		itemEntity.setLocation(locationRepository.findById(itemDto.getLocation().getId()).get());
+		itemEntity.setCategory(categoryRepository.findById(itemDto.getCategory().getId()).get());
 		itemEntity.setStatusEnum(StatusEnum.AVAILABLE);
 		itemRepository.save(itemEntity);
 	}
