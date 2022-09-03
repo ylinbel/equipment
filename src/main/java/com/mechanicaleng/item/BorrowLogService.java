@@ -91,6 +91,11 @@ public class BorrowLogService {
         return borrowLogDtoList;
     }
 
+    public List<BorrowLogDto>  getLogsByOverDueAndIsReturn(Boolean overdue, Boolean isReturn) {
+        List<BorrowLogEntity> entities = borrowLogRepository.findAllByOverDueAndIsReturn(overdue, isReturn);
+        return getLogDtos(entities);
+    }
+
     @Scheduled(initialDelay = 60_000, fixedDelayString = "${task.checkDiskSpace:PT4H0M0S}")
     public void checkOverDue() {
         LocalDateTime currentTime = LocalDateTime.now();

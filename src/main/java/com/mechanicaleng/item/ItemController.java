@@ -88,6 +88,12 @@ public class ItemController {
 		return ResponseEntity.ok(itemsWithName);
 	}
 
+	@GetMapping("/find-by-overdue-and-isReturn/{overdue}/{isReturn}")
+	public ResponseEntity<List<BorrowLogDto>> findByOverdueAndIsReturn(@PathVariable(value = "overdue")Boolean overdue, @PathVariable(value = "isReturn")Boolean isReturn) {
+		List<BorrowLogDto> list = borrowLogService.getLogsByOverDueAndIsReturn(overdue, isReturn);
+		return ResponseEntity.ok(list);
+	}
+
 	@GetMapping("/find-by-serial-like/{serial}")
 	public ResponseEntity<List<ItemDto>> findItemWithSerialLike(@PathVariable String serial) {
 		List<ItemDto> itemsWithSerial = itemService.findItemsWithSerialLike(serial);
