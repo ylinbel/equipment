@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ItemService {
@@ -72,7 +69,11 @@ public class ItemService {
 
 	public List<ItemDto> findItemsWithName(String name) {
 		List<ItemEntity> entities = itemRepository.findItemEntitiesByNameLike(name);
-		return getItemDtos(entities);
+		List<ItemEntity> entities2 = itemRepository.findItemEntitiesByNameStartingWith(name);
+		Set<ItemEntity> set = new LinkedHashSet<>();
+		set.addAll(entities);
+		set.addAll(entities2);
+		return getItemDtos(new ArrayList<>(set));
     }
 
 	public List<ItemDto> getItemDtos(List<ItemEntity> entities) {

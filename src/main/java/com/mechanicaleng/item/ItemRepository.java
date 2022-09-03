@@ -13,6 +13,8 @@ public interface ItemRepository extends JpaRepository<ItemEntity, Long> {
 
     public List<ItemEntity> findItemEntitiesByNameLike(String name);
 
+    public List<ItemEntity> findItemEntitiesByNameStartingWith(String name);
+
     public List<ItemEntity> findItemEntitiesBySerialLike(String serial);
 
     public Optional<ItemEntity> findItemEntityByIdEquals(Long id);
