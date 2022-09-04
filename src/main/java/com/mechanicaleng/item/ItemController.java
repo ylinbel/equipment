@@ -36,9 +36,9 @@ public class ItemController {
 		}
 	}
 
-	@PutMapping("/{id}/borrow")
-	public ResponseEntity<String> borrowItem(@PathVariable Long id) {
-		Boolean result = itemService.borrowItem(id);
+	@PutMapping("/{userId}/borrow/{itemId}")
+	public ResponseEntity<String> borrowItem(@PathVariable(value = "itemId") Long item, @PathVariable(value = "userId") Long user) {
+		Boolean result = itemService.borrowItem(item, user);
 		if (result) {
 			return ResponseEntity.ok("Success");
 		} else {

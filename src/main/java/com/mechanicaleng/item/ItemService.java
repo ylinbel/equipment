@@ -128,13 +128,13 @@ public class ItemService {
 	}
 
 	@Transactional
-	public Boolean borrowItem(Long id) {
+	public Boolean borrowItem(Long id, Long userId) {
 		Optional<ItemEntity> optItemEntity = itemRepository.findItemEntityByIdAndStatusEnum(id, StatusEnum.AVAILABLE);
 		if (optItemEntity.isEmpty()) return false;
 		ItemEntity itemEntity = optItemEntity.get();
 		itemEntity.setStatusEnum(StatusEnum.NOT_AVAILABLE);
 		itemRepository.save(itemEntity);
-		return borrowLogService.handleBorrowLog(2L, itemEntity);
+		return borrowLogService.handleBorrowLog(userId, itemEntity);
 	}
 
 	@Transactional
