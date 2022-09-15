@@ -30,8 +30,8 @@ public class BorrowLogService {
     //create log
 
 
-    public Boolean handleBorrowLog(Long userId, ItemEntity itemEntity) {
-        Optional<UserEntity> user = userRepository.findById(userId);
+    public Boolean handleBorrowLog(String userName, ItemEntity itemEntity) {
+        Optional<UserEntity> user = userRepository.findUserEntityByName(userName);
         if (user.isPresent()) {
             BorrowLogEntity borrowLogEntity = new BorrowLogEntity();
             borrowLogEntity.setUser(user.get());
@@ -71,8 +71,8 @@ public class BorrowLogService {
 
 
     //find all current borrow list with user id
-    public List<BorrowLogDto> findBorrowList(Long userId) {
-        Optional<UserEntity> userEntityOptional = userRepository.findById(userId);
+    public List<BorrowLogDto> findBorrowList(String userName) {
+        Optional<UserEntity> userEntityOptional = userRepository.findUserEntityByName(userName);
         if (userEntityOptional.isEmpty()) {
             return Collections.emptyList();
         } else {

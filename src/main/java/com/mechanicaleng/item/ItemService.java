@@ -5,9 +5,7 @@ import com.mechanicaleng.category.CategoryRepository;
 import com.mechanicaleng.location.LocationEntity;
 import com.mechanicaleng.location.LocationRepository;
 import com.mechanicaleng.mail.SendMailService;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -128,13 +126,13 @@ public class ItemService {
 	}
 
 	@Transactional
-	public Boolean borrowItem(Long id, Long userId) {
+	public Boolean borrowItem(Long id, String userName) {
 		Optional<ItemEntity> optItemEntity = itemRepository.findItemEntityByIdAndStatusEnum(id, StatusEnum.AVAILABLE);
 		if (optItemEntity.isEmpty()) return false;
 		ItemEntity itemEntity = optItemEntity.get();
 		itemEntity.setStatusEnum(StatusEnum.NOT_AVAILABLE);
 		itemRepository.save(itemEntity);
-		return borrowLogService.handleBorrowLog(userId, itemEntity);
+		return borrowLogService.handleBorrowLog(userName, itemEntity);
 	}
 
 	@Transactional

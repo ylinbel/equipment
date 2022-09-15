@@ -1,6 +1,7 @@
 package com.mechanicaleng.item;
 
 import com.mechanicaleng.location.LocationService;
+import com.mechanicaleng.login.UserInfoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,9 +37,9 @@ public class ItemController {
 		}
 	}
 
-	@PutMapping("/{userId}/borrow/{itemId}")
-	public ResponseEntity<String> borrowItem(@PathVariable(value = "itemId") Long item, @PathVariable(value = "userId") Long user) {
-		Boolean result = itemService.borrowItem(item, user);
+	@PutMapping("/borrow/{itemId}")
+	public ResponseEntity<String> borrowItem(@PathVariable(value = "itemId") Long item) {
+		Boolean result = itemService.borrowItem(item, UserInfoUtil.CURRENT_USER.get());
 		if (result) {
 			return ResponseEntity.ok("Success");
 		} else {
@@ -133,11 +134,15 @@ public class ItemController {
 		return itemsByCategory != null ? ResponseEntity.ok(itemsByCategory) : ResponseEntity.notFound().build();
 	}
 
-	@GetMapping("log/get-borrow-list/{user_id}")
-	public ResponseEntity<List<BorrowLogDto>> getBorrowList(@PathVariable(value = "user_id") long id) {
-		List<BorrowLogDto> borrowList = borrowLogService.findBorrowList(id);
+	@GetMapping("log/get-borrow-list")
+	public ResponseEntity<List<BorrowLogDto>> getBorrowList() {
+		List<BorrowLogDto> borrowList = borrowLogService.findBorrowList(UserInfoUtil.CURRENT_USER.get());
 		return borrowList != null ? ResponseEntity.ok(borrowList) : ResponseEntity.notFound().build();
 	}
 
-
+	@GetMapping("log/check-overdue")
+	public ResponseEntity<String> checkOverdue() {
+		borrowLogService.checkOverDue();
+		return ResponseEntity.ok("success");
+	}
 }

@@ -41,9 +41,9 @@ public class UserService {
     }
 
     //find user with name
-    public List<UserDisplayDto> findUserWithName(String name) {
-        List<UserEntity> entities = userRepository.findUserEntitiesByNameLike(name);
-        return getUserDtos(entities);
+    public UserDisplayDto findUserWithName(String name) {
+        Optional<UserEntity> entities = userRepository.findUserEntityByName(name);
+        return entities.isPresent() ? entities.get().toDto() : null;
     }
 
     //find user with email
@@ -65,9 +65,9 @@ public class UserService {
         return userDtoList;
     }
 
-    public Boolean userLogin(String email, String password) {
+    public String userLogin(String email, String password) {
         UserEntity userEntity = userRepository.findUserEntityByEmailEquals(email);
-        return userEntity.getPassword().equals(password);
+        return userEntity.getPassword().equals(password) ? userEntity.getName() : null;
     }
 
     /*warning email 30 days before the end date to the user and manager
@@ -82,12 +82,15 @@ public class UserService {
                         sendMailService.sendLeavingEmailToUser(userEntity);
                         sendMailService.sendLeavingEmailToManager(userEntity);
                     }
-                    if (date.isAfter(userEntity.getUtilDate())) {
-                        deleteWithId(userEntity.getId());
-                    }
-                });
+            if (date.isAfter(userEntity.getUtilDate())) {
+                deleteWithId(userEntity.getId());
+            }
+        });
     }
 
 
-
+    public List<UserDisplayDto> findUserListWithName(String name) {
+        List<UserEntity> entities = userRepository.findUserEntitiesByNameLike(name);
+        return getUserDtos(entities);
+    }
 }

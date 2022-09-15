@@ -72,7 +72,7 @@ public class LocationService {
 
     public LocationDto findLocationWithSerial(String serial) {
         LocationEntity locations = locationRepository.findLocationEntityBySerialEquals(serial);
-        return locations.toDto();
+        return locations != null ? locations.toDto() : null;
     }
 
 

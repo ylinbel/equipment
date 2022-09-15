@@ -58,7 +58,11 @@ public class LocationController {
     @GetMapping("find-by-serial/{serial}")
     public ResponseEntity<LocationDto> findBySerial(@PathVariable String serial) {
         LocationDto locationBySerial = locationService.findLocationWithSerial(serial);
-        return ResponseEntity.ok(locationBySerial);
+        if (locationBySerial != null) {
+            return ResponseEntity.ok(locationBySerial);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("find-by-name/{name}")
