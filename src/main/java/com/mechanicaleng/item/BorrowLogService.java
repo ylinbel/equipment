@@ -51,6 +51,7 @@ public class BorrowLogService {
             borrowLogEntity.setIsReturn(true);
             borrowLogEntity.setReturnTime(LocalDateTime.now());
             borrowLogRepository.save(borrowLogEntity);
+            return true;
         }
         return false;
     }
