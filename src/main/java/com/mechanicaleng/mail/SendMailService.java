@@ -12,7 +12,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,10 +31,10 @@ public class SendMailService {
     public void sendBrokenEmail(ItemEntity item) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(sender);
-        message.setTo("2025381928@qq.com");
+        message.setTo("me-dynamics-dl@imperial.ac.uk");
         message.setSubject("Item Broken");
         message.setText(
-                "Dear manager, \n" +
+                "Dear Dynamics Group Laboratory Manager, \n" +
                         "\n" +
                         "An item is reported broken: \n" +
                         "\n" +
@@ -44,9 +43,19 @@ public class SendMailService {
                         "\n" +
                         "Dynamics Lab Email Assistant\n" +
                         "\n" +
-                        "*******************\n" +
+                        "………………………………………………………………………………………………\n" +
                         "\n" +
-                        "Please do not reply this email address directly. \n"
+                        "Please do not reply this email address directly. \n" +
+                        "\n" +
+                        "Dr Luke Muscutt\n" +
+                        "Dynamics Group Laboratory Technician \n" +
+                        "562 and 003 City & Guilds Building\n" +
+                        "Imperial College London\n" +
+                        "Exhibition Road\n" +
+                        "London SW7 2AZ\n" +
+                        "Tel: +44 (0)20 7594 7188\n" +
+                        "Mobile: +44 (0)7723 325 834\n" +
+                        "Email: l.muscutt@imperial.ac.uk"
         );
         javaMailSender.send(message);
         logger.info("Successfully send the email");
@@ -58,18 +67,31 @@ public class SendMailService {
         message.setFrom(sender);
         message.setTo(log.getUser().getEmail());
         message.setSubject("Reminder: Please Return Overdue Items");
-        message.setText("Dear user, \n" +
+        message.setText(
+                "Dear" + log.getUser().getName() + "," +
                 "\n" +
-                "This is a reminder that you need to return the following items to the lab as soon as possible: \n" +
+                "This is a reminder that you need to return the following items to the lab as soon as possible. " +
+                        "If you want to keep it for longer, please check in and check out the item again. " +
                 "\n" +
                 "Item name: " + log.getItem().getName() + ", overdue time: " + log.getOverDueTime().toString() + "\n" +
                 "\n" +
                 "Thank you,\n" +
+                "\n" +
                 "Dynamics Lab Email Assistant\n" +
                 "\n" +
-                "*******************\n" +
+                "………………………………………………………………………………………………\n" +
                 "\n" +
-                "Please do not reply this email address directly. \n"
+                "Please do not reply this email address directly. \n" +
+                "\n" +
+                "Dr Luke Muscutt\n" +
+                "Dynamics Group Laboratory Technician \n" +
+                "562 and 003 City & Guilds Building\n" +
+                "Imperial College London\n" +
+                "Exhibition Road\n" +
+                "London SW7 2AZ\n" +
+                "Tel: +44 (0)20 7594 7188\n" +
+                "Mobile: +44 (0)7723 325 834\n" +
+                "Email: l.muscutt@imperial.ac.uk"
         );
         javaMailSender.send(message);
         logger.info("Successfully send the email");
@@ -80,17 +102,27 @@ public class SendMailService {
         message.setFrom(sender);
         message.setTo(user.getEmail());
         message.setSubject("Reminder: Change To Your account");
-        message.setText("Dear user, \n" + user.getName() +
+        message.setText(
+                "Dear" + user.getName() + "," +
                 "\n" +
                 "This is a reminder that your account will be deleted within 30 days. Please return all the items before you leave." +
-                "If you want to change the date you leave the lab, please edit 'end date' in your personal information.\n" +
+                "If you want to change the date you leave the lab, please contact the manager.\n" +
                 "\n" +
-                "\n" +
-                "Thank you,\n" +
-                "Dynamics Lab Manager" +
-                "*******************\n" +
-                "\n" +
-                "Please do not reply this email address directly. \n"
+                        "Dynamics Lab Email Assistant\n" +
+                        "\n" +
+                        "………………………………………………………………………………………………\n" +
+                        "\n" +
+                        "Please do not reply this email address directly. \n" +
+                        "\n" +
+                        "Dr Luke Muscutt\n" +
+                        "Dynamics Group Laboratory Technician \n" +
+                        "562 and 003 City & Guilds Building\n" +
+                        "Imperial College London\n" +
+                        "Exhibition Road\n" +
+                        "London SW7 2AZ\n" +
+                        "Tel: +44 (0)20 7594 7188\n" +
+                        "Mobile: +44 (0)7723 325 834\n" +
+                        "Email: l.muscutt@imperial.ac.uk"
         );
         javaMailSender.send(message);
         logger.info("Successfully send the email");
@@ -99,9 +131,10 @@ public class SendMailService {
     public void sendLeavingEmailToManager(UserEntity user) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(sender);
-        message.setTo("2024381928qq.com");
+        message.setTo("me-dynamics-dl@imperial.ac.uk");
         message.setSubject("User " + user.getName() + "Is About To Leave the Lab");
-        message.setText("Dear manager, \n" +
+        message.setText(
+                "Dear Dynamics Group Laboratory Manager, \n" +
                 "\n" +
                 "A user is going to leave the lab within 30 days \n" +
                 "\n" +
@@ -113,9 +146,19 @@ public class SendMailService {
                 "\n" +
                 "Dynamics Lab Email Assistant\n" +
                 "\n" +
-                "*******************\n" +
+                "………………………………………………………………………………………………\n" +
                 "\n" +
-                "Please do not reply this email address directly. \n"
+                "Please do not reply this email address directly. \n" +
+                "\n" +
+                "Dr Luke Muscutt\n" +
+                "Dynamics Group Laboratory Technician \n" +
+                "562 and 003 City & Guilds Building\n" +
+                "Imperial College London\n" +
+                "Exhibition Road\n" +
+                "London SW7 2AZ\n" +
+                "Tel: +44 (0)20 7594 7188\n" +
+                "Mobile: +44 (0)7723 325 834\n" +
+                "Email: l.muscutt@imperial.ac.uk"
         );
         javaMailSender.send(message);
         logger.info("Successfully send the email");
