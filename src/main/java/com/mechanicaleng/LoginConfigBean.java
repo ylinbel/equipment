@@ -16,6 +16,7 @@ public class LoginConfigBean implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(loginHandler).addPathPatterns("/**")
-				.excludePathPatterns(ServerConstants.LOGIN_PATH);
+				.excludePathPatterns(ServerConstants.LOGIN_PATH)
+				.excludePathPatterns(ServerConstants.REGISTRY_PATH);
 	}
 }
