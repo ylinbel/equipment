@@ -47,5 +47,5 @@ Java
 5.  The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
 6.  The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
 
-[embed]https://www.dropbox.com/s/m751x7i6adrtcb3/Manual.pdf[/embed]
-[embed]http://example.com/file.pdf[/embed]
+[embed]https://www.dropbox.com/s/m751x7i6adrtcb3/Manual.pdf [/embed]
+[embed]http://example.com/file.pdf [/embed]
